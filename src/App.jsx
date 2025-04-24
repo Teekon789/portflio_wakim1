@@ -74,7 +74,7 @@ export default function Portfolio() {
         <div className="absolute top-4 right-4 sm:right-6 z-10 flex space-x-2 sm:space-x-4">
           <button
             onClick={toggleDarkMode}
-            className={`p-2 rounded-full cursor-pointer${
+            className={`p-2 rounded-full cursor-pointer ${
               darkMode
                 ? "bg-gray-700 text-yellow-300 hover:bg-gray-600"
                 : "bg-blue-100 text-gray-800 hover:bg-blue-200"
