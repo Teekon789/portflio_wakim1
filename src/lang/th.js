@@ -26,6 +26,9 @@ const textTH = {
         desc: "เว็บสําหรับขออนุญาติและสร้างเอกสาร PDF สร้างด้วย nextjs ในส่วน เอกสารใช้เป็น react-pdf...",
       },
 
+        downloadResume: 'ดาวน์โหลดเรซูเม่',
+        resume: 'เรซูเม่',
+
   };
   
   export default textTH;

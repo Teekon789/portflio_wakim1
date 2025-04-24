@@ -26,6 +26,9 @@ const textEN = {
             desc: "A web application for requesting permissions and generating PDF documents built with Next.js. The document generation uses react-pdf...",
         },
 
+        downloadResume: 'Download Resume',
+        resume: 'Resume',
+
   };
   
   export default textEN;

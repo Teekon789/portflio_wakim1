@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaEnvelope, FaHtml5, FaCss3Alt, FaJs, FaReact, FaVuejs } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaHtml5, FaCss3Alt, FaJs, FaReact, FaVuejs, FaDownload, FaGraduationCap, FaUniversity } from 'react-icons/fa';
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import { SiNuxtdotjs } from "react-icons/si";
 import { FiSun, FiMoon } from "react-icons/fi"; 
 import Marquee from "react-fast-marquee";
 import mn_2 from './assets/mn_2.png';
 import wakim from './assets/wakim.jpg';
+import resumeFile from './assets/Resume.pdf';
 
 // แยกข้อความภาษาไทย
 import textTH from './lang/th';
@@ -29,6 +30,16 @@ export default function Portfolio() {
     }
   }, [darkMode]);
 
+  // ฟังก์ชันดาวน์โหลดเรซูเม่
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = resumeFile; // เปลี่ยนเป็นที่อยู่ของไฟล์เรซูเม่
+    link.download = 'Resume.pdf'; // ชื่อไฟล์เมื่อดาวน์โหลด
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+    
   const projects = [
     {
       title: t.projects_name.title,
@@ -44,6 +55,7 @@ export default function Portfolio() {
       <div className="text-center">
         {/* ส่วนปุ่มควบคุม */}
         <div className="absolute top-4 right-6 z-10 flex space-x-4">
+  
           <button 
             onClick={toggleDarkMode} 
             className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-yellow-300 hover:bg-gray-600' : 'bg-blue-100 text-gray-800 hover:bg-blue-200'}`}
@@ -58,6 +70,7 @@ export default function Portfolio() {
           >
             {lang === 'th' ? 'English' : 'ภาษาไทย'}
           </button>
+
         </div>
 
         {/* ส่วน Hero */}
@@ -88,66 +101,120 @@ export default function Portfolio() {
         </section>
 
         {/* ส่วน About Me */}
-        <section id="about" className={`px-6 py-20 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
-          <div className="max-w-4xl mx-auto">
-            <motion.h2 
-              className="text-3xl font-bold text-center mb-12"
+        <section id="about" className={`py-20 ${darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-800'}`}>
+          {/* Container หลัก */}
+          <div className="max-w-6xl mx-auto px-6">
+            
+            {/* ส่วนหัวข้อ About Me */}
+            <motion.div
+              className="text-center mb-16"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              {t.about.title}
-            </motion.h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>
+                {t.about.title}
+              </h2>
+              {/* เส้นใต้หัวข้อ */}
+              <div className={`h-1 w-24 mx-auto ${darkMode ? 'bg-indigo-500' : 'bg-indigo-400'} rounded-full`}></div>
+            </motion.div>
+
+            {/* ส่วนเนื้อหา - จัดวางแบบ Flex */}
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              
+              {/* ส่วนรูปโปรไฟล์ - ตรงกลางเสมอ */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                className="w-full lg:w-1/2 flex justify-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h3 className={`text-2xl font-semibold mb-4 ${darkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
-                  {t.about.title}
-                </h3>
-                <p className="mb-6 leading-relaxed">
-                  {t.about.content}
-                </p>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className={`font-medium ${darkMode ? 'text-indigo-200' : 'text-indigo-500'}`}>
-                      {t.about.education}
-                    </h4>
-                    <p className="text-sm opacity-80">{t.about.major}</p>
-                  </div>
-                  <div>
-                    <h4 className={`font-medium ${darkMode ? 'text-indigo-200' : 'text-indigo-500'}`}>
-                      {t.about.university_name}
-                    </h4>
-                    <p className="text-sm opacity-80">{t.about. university}</p>
-                  </div>
-                </div>
-              </motion.div>
               
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center justify-center"
-              >
-                <div className={`w-64 h-64 rounded-full ${darkMode ? 'bg-gray-700' : 'bg-gray-200'} mb-6 overflow-hidden`}>
+                <div className={`relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 ${darkMode ? 'border-indigo-500' : 'border-indigo-400'} shadow-xl`}>
                   <img 
                     src={wakim} 
                     alt="Profile" 
                     className="w-full h-full object-cover"
                   />
+               
                 </div>
-              
+              </motion.div>
+
+              {/* ส่วนข้อความ */}
+              <motion.div
+                className="w-full lg:w-1/2 text-center lg:text-left"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <div className="space-y-8">
+                  {/* ข้อความเกี่ยวกับตัวฉัน */}
+                  <p className={`text-lg md:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    {t.about.content}
+                  </p>
+
+                  {/* การศึกษา */}
+                  <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} shadow-md`}>
+                    <div className="space-y-6">
+                      {/* รายการการศึกษา */}
+                      <div className="flex items-start gap-4">
+                        <div className={`p-3 rounded-lg ${darkMode ? 'bg-indigo-800 text-indigo-200' : 'bg-indigo-100 text-indigo-600'}`}>
+                          <FaGraduationCap className="text-xl" /> {/* ใช้ React Icon */}
+                        </div>
+                        <div>
+                          <h3 className={`text-xl font-semibold ${darkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
+                            {t.about.education}
+                          </h3>
+                          <p className={`mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.about.major}</p>
+                        </div>
+                      </div>
+
+                      {/* รายการมหาวิทยาลัย */}
+                      <div className="flex items-start gap-4">
+                        <div className={`p-3 rounded-lg ${darkMode ? 'bg-indigo-800 text-indigo-200' : 'bg-indigo-100 text-indigo-600'}`}>
+                          <FaUniversity className="text-xl" /> {/* ใช้ React Icon */}
+                        </div>
+                        <div>
+                          <h3 className={`text-xl font-semibold ${darkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
+                            {t.about.university_name}
+                          </h3>
+                          <p className={`mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.about.university}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ปุ่มดาวน์โหลด Resume */}
+                  <div className="flex justify-center lg:justify-start">
+                    <motion.button
+                      onClick={handleDownloadResume}
+                      className={`flex items-center gap-3 px-6 py-3 rounded-full text-lg font-medium ${
+                        darkMode 
+                          ? 'bg-indigo-600 hover:bg-indigo-700' 
+                          : 'bg-indigo-500 hover:bg-indigo-600'
+                      } text-white transition-colors cursor-pointer hover:cursor-pointer`}
+                      whileHover={{ 
+                        scale: 1.05,
+                        transition: { duration: 0.2 }
+                      }}
+                      whileTap={{ 
+                        scale: 0.95,
+                        transition: { duration: 0.1 }
+                      }}
+                    >
+                      <FaDownload className="text-xl" />
+                      <span>{t.downloadResume}</span>
+                    </motion.button>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
-        </section>
+      </section>
+
 
         {/* ส่วน Skills */}
         <div className={`py-4 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'}`}>
@@ -196,8 +263,6 @@ export default function Portfolio() {
             </div>
           </Marquee>
         </div>
-
-        
 
         {/* ส่วน Projects */}
         <section id="projects" className={`px-6 py-20 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
