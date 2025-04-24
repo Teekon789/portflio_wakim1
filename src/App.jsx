@@ -517,7 +517,7 @@ export default function Portfolio() {
             >
               <FaGithub
                 className={`w-6 h-6 ${
-                  darkMode ? "text-indigo-400" : "text-indigo-600"
+                  darkMode ? "text-gray-200" : "text-gray-800"
                 }`}
               />
             </a>
@@ -529,7 +529,7 @@ export default function Portfolio() {
             >
               <FaEnvelope
                 className={`w-6 h-6 ${
-                  darkMode ? "text-indigo-400" : "text-indigo-600"
+                  darkMode ? "text-gray-200" : "text-gray-800"
                 }`}
               />
             </a>
