@@ -53,42 +53,6 @@ const additionalProjects = [
   }
 ];
 
-// สร้างคอมโพเนนต์ให้สามารถนำกลับมาใช้ใหม่ได้
-// คอมโพเนนต์การ์ด Testimonial
-const TestimonialCard = ({ name, role, content, avatar, darkMode }) => (
-  <motion.div
-    className={`p-6 rounded-xl shadow-md ${
-      darkMode ? "bg-gray-700" : "bg-white"
-    } flex flex-col h-full`}
-    whileHover={{ y: -8, transition: { duration: 0.3 } }}
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true }}
-  >
-    <div className="flex items-center mb-4">
-      <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-        <img
-          src={avatar || "https://via.placeholder.com/150"}
-          alt={name}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div>
-        <h4 className={`font-semibold ${darkMode ? "text-white" : "text-gray-800"}`}>
-          {name}
-        </h4>
-        <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-          {role}
-        </p>
-      </div>
-    </div>
-    <p className={`italic text-base ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
-      "{content}"
-    </p>
-  </motion.div>
-);
-
 // คอมโพเนนต์การ์ด Service
 const ServiceCard = ({ icon: Icon, title, description, darkMode }) => (
   <motion.div
@@ -129,7 +93,7 @@ const ServiceCard = ({ icon: Icon, title, description, darkMode }) => (
   </motion.div>
 );
 
-// เพิ่มคอมโพเนนต์การ์ด Project
+// คอมโพเนนต์การ์ด Project
 const ProjectCard = ({ project, darkMode, t }) => (
   <motion.div
     className={`text-justify p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg transition ${
@@ -166,7 +130,6 @@ const ProjectCard = ({ project, darkMode, t }) => (
     >
       {project.desc}
     </p>
-    {/* แสดงเทคโนโลยีที่ใช้ในโปรเจค (ถ้ามี) */}
     {project.technologies && (
       <div className="flex flex-wrap gap-2 mb-3">
         {project.technologies.map((tech, idx) => (
@@ -219,7 +182,7 @@ export default function Portfolio() {
   
   const t = lang === "th" ? textTH : textEN;
 
-  // เพิ่มข้อความภาษาไทยสำหรับคอมโพเนนต์ใหม่
+  // ข้อความภาษาไทย
   const thaiTextAdditions = {
     services: {
       title: "บริการของฉัน",
@@ -242,55 +205,8 @@ export default function Portfolio() {
         }
       ]
     },
-    testimonials: {
-      title: "รีวิวจากลูกค้า",
-      items: [
-        {
-          name: "คุณสมชาย ใจดี",
-          role: "ผู้จัดการ บริษัท ABC",
-          content: "การทำงานเป็นมืออาชีพมาก ผลงานออกมาดีเกินคาด โปรเจคเสร็จตรงเวลาและมีคุณภาพสูง"
-        },
-        {
-          name: "คุณนภา สุขสันต์",
-          role: "เจ้าของร้าน Cafe Delight",
-          content: "สื่อสารชัดเจน เข้าใจความต้องการ และนำเสนอไอเดียใหม่ๆ ที่ตรงใจ ประทับใจมาก"
-        },
-        {
-          name: "คุณวิชัย มั่นคง",
-          role: "ผู้ก่อตั้ง Tech Startup",
-          content: "มีความรู้เชิงเทคนิคสูง แก้ปัญหาได้อย่างมีประสิทธิภาพ เป็นพาร์ทเนอร์ที่ดีในการพัฒนาธุรกิจ"
-        }
-      ]
-    },
-    experience: {
-      title: "ประสบการณ์การทำงาน",
-      items: [
-        {
-          role: "นักพัฒนาเว็บไซต์ Front-end",
-          company: "บริษัท XYZ",
-          period: "2565 - ปัจจุบัน",
-          description: "พัฒนาและดูแลเว็บไซต์หลักของบริษัท ปรับปรุงประสบการณ์ผู้ใช้ และเพิ่มประสิทธิภาพการโหลด"
-        },
-        {
-          role: "นักพัฒนา Full Stack",
-          company: "บริษัท Tech Solutions",
-          period: "2563 - 2565",
-          description: "พัฒนาแอปพลิเคชันเว็บสำหรับลูกค้าองค์กร ใช้เทคโนโลยี MERN stack"
-        },
-        {
-          role: "นักพัฒนา Junior",
-          company: "สตาร์ทอัพ Innovation",
-          period: "2562 - 2563",
-          description: "พัฒนาคุณสมบัติใหม่และแก้ไขบั๊กสำหรับแพลตฟอร์มอีคอมเมิร์ซ"
-        }
-      ]
-    },
     contact: {
       title: "ติดต่อ",
-      name: "ชื่อ",
-      email: "อีเมล",
-      message: "ข้อความ",
-      send: "ส่งข้อความ",
       info: {
         email: "teeboy789456@gmail.com",
         phone: "+66 12 345 6789",
@@ -303,8 +219,6 @@ export default function Portfolio() {
       skills: "ทักษะ",
       services: "บริการ",
       projects: "ผลงาน",
-      experience: "ประสบการณ์",
-      testimonials: "รีวิว",
       contact: "ติดต่อ"
     },
     scrollTop: "เลื่อนขึ้น",
@@ -314,7 +228,7 @@ export default function Portfolio() {
     }
   };
 
-  // เพิ่มข้อความภาษาอังกฤษสำหรับคอมโพเนนต์ใหม่
+  // ข้อความภาษาอังกฤษ
   const englishTextAdditions = {
     services: {
       title: "My Services",
@@ -337,55 +251,8 @@ export default function Portfolio() {
         }
       ]
     },
-    testimonials: {
-      title: "Testimonials",
-      items: [
-        {
-          name: "John Smith",
-          role: "Manager at ABC Company",
-          content: "Very professional work, exceeded expectations, completed on time with high quality"
-        },
-        {
-          name: "Sarah Johnson",
-          role: "Owner of Cafe Delight",
-          content: "Clear communication, understood requirements, and brought new ideas that hit the mark"
-        },
-        {
-          name: "Michael Chen",
-          role: "Tech Startup Founder",
-          content: "High technical knowledge, efficient problem-solving, great business development partner"
-        }
-      ]
-    },
-    experience: {
-      title: "Work Experience",
-      items: [
-        {
-          role: "Front-end Developer",
-          company: "XYZ Company",
-          period: "2022 - Present",
-          description: "Developing and maintaining the company's main website, improving user experience and loading performance"
-        },
-        {
-          role: "Full Stack Developer",
-          company: "Tech Solutions",
-          period: "2020 - 2022",
-          description: "Developing web applications for enterprise clients using MERN stack"
-        },
-        {
-          role: "Junior Developer",
-          company: "Innovation Startup",
-          period: "2019 - 2020",
-          description: "Developing new features and fixing bugs for an e-commerce platform"
-        }
-      ]
-    },
     contact: {
       title: "Contact",
-      name: "Name",
-      email: "Email",
-      message: "Message",
-      send: "Send Message",
       info: {
         email: "teeboy789456@gmail.com",
         phone: "+66 12 345 6789",
@@ -398,8 +265,6 @@ export default function Portfolio() {
       skills: "Skills",
       services: "Services",
       projects: "Projects",
-      experience: "Experience",
-      testimonials: "Testimonials",
       contact: "Contact"
     },
     scrollTop: "Scroll Top",
@@ -418,47 +283,35 @@ export default function Portfolio() {
     setDarkMode(!darkMode);
   };
 
-  // เพิ่มฟังก์ชันเปิด/ปิดเมนูมือถือ
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // ฟังก์ชันจัดการการเลื่อนไปยังส่วนต่างๆ
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       setIsAnimating(true);
       const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
-      const yOffset = -headerHeight - 10; // ปรับระยะห่างจากส่วนหัว
+      const yOffset = -headerHeight - 10;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({ top: y, behavior: 'smooth' });
       setActiveSection(sectionId);
       setMobileMenuOpen(false);
       
-      // หลังจากเลื่อนเสร็จแล้วให้หยุดการแอนิเมชัน
       setTimeout(() => {
         setIsAnimating(false);
       }, 1000);
     }
   };
 
-  // ฟังก์ชันดาวน์โหลดเรซูเม่
   const handleDownloadResume = () => {
     const link = document.createElement("a");
-    link.href = resumeFile; // เปลี่ยนเป็นที่อยู่ของไฟล์เรซูเม่
-    link.download = "Resume.pdf"; // ชื่อไฟล์เมื่อดาวน์โหลด
+    link.href = resumeFile;
+    link.download = "Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
-
-  // ฟังก์ชันสำหรับการจัดการการส่งแบบฟอร์มติดต่อ
-  const handleSubmitContact = (e) => {
-    e.preventDefault();
-    // ในสถานการณ์จริงจะส่งข้อมูลไปยัง API หรือบริการอีเมล
-    alert(lang === "th" ? "ส่งข้อความเรียบร้อยแล้ว!" : "Message sent successfully!");
-    e.target.reset();
   };
 
   // เพิ่มโปรเจคเข้าไปในอาร์เรย์
@@ -474,15 +327,12 @@ export default function Portfolio() {
     ...additionalProjects
   ];
 
-  // เพิ่ม Effect สำหรับตรวจจับการเลื่อนหน้า
   useEffect(() => {
     const handleScroll = () => {
-      // แสดงปุ่มเลื่อนขึ้นเมื่อเลื่อนลงมาเกิน 300px
       setShowScrollTop(window.scrollY > 300);
       
-      // ตรวจสอบว่าเราอยู่ในส่วนไหนของหน้า
       if (!isAnimating) {
-        const sections = ['home', 'about', 'skills', 'services', 'projects', 'experience', 'testimonials', 'contact'];
+        const sections = ['home', 'about', 'skills', 'services', 'projects', 'contact'];
         let currentSection = activeSection;
         
         for (const section of sections) {
@@ -491,7 +341,6 @@ export default function Portfolio() {
             const rect = element.getBoundingClientRect();
             const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
             
-            // ถ้าส่วนบนของเซ็กชันอยู่เหนือหน้าจอไม่เกิน headerHeight + บางส่วน และส่วนล่างของเซ็กชันยังอยู่ใต้หน้าจอ
             if (rect.top <= headerHeight + 100 && rect.bottom >= headerHeight) {
               currentSection = section;
               break;
@@ -507,14 +356,12 @@ export default function Portfolio() {
 
     window.addEventListener('scroll', handleScroll);
     
-    // ตั้งค่า dark mode ตามการตั้งค่าของระบบ (ถ้าไม่เคยตั้งค่ามาก่อน)
     if (darkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
     
-    // ทำความสะอาด event listener เมื่อ component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -527,8 +374,6 @@ export default function Portfolio() {
     { id: 'skills', label: tExtended.navigation.skills },
     { id: 'services', label: tExtended.navigation.services },
     { id: 'projects', label: tExtended.navigation.projects },
-    { id: 'experience', label: tExtended.navigation.experience },
-    { id: 'testimonials', label: tExtended.navigation.testimonials },
     { id: 'contact', label: tExtended.navigation.contact }
   ];
 
@@ -540,7 +385,7 @@ export default function Portfolio() {
           : "bg-gradient-to-b from-gray-100 to-white"
       } min-h-screen font-sans relative transition-colors duration-300`}
     >
-      {/* เพิ่ม header แบบ sticky */}
+      {/* Header */}
       <header 
         ref={headerRef}
         className={`sticky top-0 z-50 py-4 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
@@ -548,7 +393,7 @@ export default function Portfolio() {
         }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* โลโก้ */}
+          {/* Logo */}
           <a 
             href="#" 
             onClick={(e) => {
@@ -565,7 +410,7 @@ export default function Portfolio() {
             <span>{` ${t.fullname.split(' ')[1]}`}</span>
           </a>
           
-          {/* เมนูสำหรับหน้าจอขนาดใหญ่ */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <button
@@ -586,7 +431,7 @@ export default function Portfolio() {
             ))}
           </nav>
           
-          {/* ส่วนปุ่มควบคุม */}
+          {/* Control Buttons */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <button
               onClick={toggleDarkMode}
@@ -617,7 +462,7 @@ export default function Portfolio() {
               {lang === "th" ? "English" : "ภาษาไทย"}
             </button>
             
-            {/* ปุ่มแฮมเบอร์เกอร์สำหรับหน้าจอมือถือ */}
+            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2"
               onClick={toggleMobileMenu}
@@ -633,7 +478,7 @@ export default function Portfolio() {
         </div>
       </header>
       
-      {/* เมนูมือถือ */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -658,11 +503,7 @@ export default function Portfolio() {
                       : darkMode
                       ? "text-gray-300 hover:bg-gray-700"
                       : "text-gray-600 hover:bg-gray-100"
-                      
-
-                      ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-600 hover:bg-gray-100"
-                    }`}
+                  }`}
                 >
                   {item.label}
                 </button>
@@ -673,7 +514,7 @@ export default function Portfolio() {
       </AnimatePresence>
 
       <div className="text-center">
-        {/* ส่วน Hero */}
+        {/* Hero Section */}
         <section
           id="home"
           className={`flex flex-col items-center justify-center text-center pt-20 pb-12 sm:py-24 md:py-28 px-4 min-h-[90vh] ${
@@ -704,7 +545,6 @@ export default function Portfolio() {
             {t.role}
           </motion.p>
           
-          {/* ปรับปรุงปุ่มดู Projects ให้มี Animation */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -744,7 +584,7 @@ export default function Portfolio() {
             </motion.a>
           </motion.div>
 
-          {/* เพิ่มแอนิเมชันลูกศรเลื่อนลง */}
+          {/* Scroll Down Animation */}
           <motion.div
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
             initial={{ opacity: 0, y: -10 }}
@@ -777,16 +617,14 @@ export default function Portfolio() {
           </motion.div>
         </section>
 
-        {/* ส่วน About Me */}
+        {/* About Me Section */}
         <section
           id="about"
           className={`py-12 sm:py-16 md:py-20 ${
             darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800"
           }`}
         >
-          {/* Container หลัก */}
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            {/* ส่วนหัวข้อ About Me */}
             <motion.div
               className="text-center mb-12 sm:mb-16"
               initial={{ opacity: 0, y: 20 }}
@@ -801,7 +639,6 @@ export default function Portfolio() {
               >
                 {t.about.title}
               </h2>
-              {/* เส้นใต้หัวข้อ */}
               <div
                 className={`h-1 w-20 sm:w-24 mx-auto ${
                   darkMode ? "bg-indigo-500" : "bg-indigo-400"
@@ -809,9 +646,7 @@ export default function Portfolio() {
               ></div>
             </motion.div>
 
-            {/* ส่วนเนื้อหา - จัดวางแบบ Flex */}
             <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
-              {/* ส่วนรูปโปรไฟล์ - ตรงกลางเสมอ */}
               <motion.div
                 className="w-full lg:w-1/2 flex justify-center"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -832,7 +667,6 @@ export default function Portfolio() {
                 </div>
               </motion.div>
 
-              {/* ส่วนข้อความ */}
               <motion.div
                 className="w-full lg:w-1/2 text-center lg:text-left"
                 initial={{ opacity: 0, y: 20 }}
@@ -841,7 +675,6 @@ export default function Portfolio() {
                 viewport={{ once: true }}
               >
                 <div className="space-y-6 sm:space-y-8">
-                  {/* ข้อความเกี่ยวกับตัวฉัน */}
                   <p
                     className={`text-base sm:text-lg md:text-xl leading-relaxed ${
                       darkMode ? "text-gray-300" : "text-gray-700"
@@ -856,7 +689,6 @@ export default function Portfolio() {
                     } shadow-md w-full text-left`}
                   >
                     <div className="space-y-4 sm:space-y-6">
-                      {/* รายการการศึกษา */}
                       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
                         <div
                           className={`w-10 h-10 flex items-center justify-center rounded-lg ${
@@ -885,7 +717,6 @@ export default function Portfolio() {
                         </div>
                       </div>
 
-                      {/* รายการมหาวิทยาลัย */}
                       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
                         <div
                           className={`w-10 h-10 flex items-center justify-center rounded-lg ${
@@ -916,7 +747,6 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  {/* ปุ่มดาวน์โหลด Resume */}
                   <div className="flex justify-center lg:justify-start">
                     <motion.button
                       onClick={handleDownloadResume}
@@ -944,7 +774,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* ส่วน Skills */}
+        {/* Skills Section */}
         <section
           id="skills"
           className={`py-12 sm:py-16 ${
@@ -952,7 +782,6 @@ export default function Portfolio() {
           }`}
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            {/* หัวข้อ Skills */}
             <motion.div
               className="text-center mb-8 sm:mb-12"
               initial={{ opacity: 0, y: 20 }}
@@ -963,7 +792,6 @@ export default function Portfolio() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
                 {t.skills}
               </h2>
-              {/* เส้นใต้หัวข้อ */}
               <div
                 className={`h-1 w-20 sm:w-24 mx-auto ${
                   darkMode ? "bg-indigo-500" : "bg-indigo-400"
@@ -971,7 +799,6 @@ export default function Portfolio() {
               ></div>
             </motion.div>
             
-            {/* แบ่งประเภททักษะ */}
             <div className="mb-10 sm:mb-12">
               <motion.h3
                 className={`text-xl sm:text-2xl font-semibold mb-4 text-center ${
@@ -1206,7 +1033,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* เพิ่มส่วน Services */}
+        {/* Services Section */}
         <section
           id="services"
           className={`py-12 sm:py-16 md:py-20 ${
@@ -1214,7 +1041,6 @@ export default function Portfolio() {
           }`}
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            {/* หัวข้อ Services */}
             <motion.div
               className="text-center mb-12 sm:mb-16"
               initial={{ opacity: 0, y: 20 }}
@@ -1229,7 +1055,6 @@ export default function Portfolio() {
               >
                 {tExtended.services.title}
               </h2>
-              {/* เส้นใต้หัวข้อ */}
               <div
                 className={`h-1 w-20 sm:w-24 mx-auto ${
                   darkMode ? "bg-indigo-500" : "bg-indigo-400"
@@ -1237,9 +1062,7 @@ export default function Portfolio() {
               ></div>
             </motion.div>
 
-            {/* ตารางบริการ */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {/* แสดงรายการบริการ */}
               {tExtended.services.items.map((service, index) => (
                 <ServiceCard
                   key={index}
@@ -1253,7 +1076,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* ส่วน Projects */}
+        {/* Projects Section */}
         <section
           id="projects"
           className={`px-4 sm:px-6 py-12 sm:py-16 md:py-20 ${
@@ -1261,7 +1084,6 @@ export default function Portfolio() {
           }`}
         >
           <div className="max-w-6xl mx-auto">
-            {/* หัวข้อ Projects */}
             <motion.div
               className="text-center mb-12 sm:mb-16"
               initial={{ opacity: 0, y: 20 }}
@@ -1276,7 +1098,6 @@ export default function Portfolio() {
               >
                 {t.featuredProjects}
               </h2>
-              {/* เส้นใต้หัวข้อ */}
               <div
                 className={`h-1 w-20 sm:w-24 mx-auto ${
                   darkMode ? "bg-indigo-500" : "bg-indigo-400"
@@ -1304,473 +1125,215 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* เพิ่มส่วน Experience */}
-        <section
-          id="experience"
-          className={`py-12 sm:py-16 md:py-20 ${
-            darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-          }`}
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            {/* หัวข้อ Experience */}
-            <motion.div
-              className="text-center mb-12 sm:mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <h2
-                className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
-                  darkMode ? "text-indigo-400" : "text-indigo-600"
-                }`}
-              >
-                {tExtended.experience.title}
-              </h2>
-              {/* เส้นใต้หัวข้อ */}
-              <div
-                className={`h-1 w-20 sm:w-24 mx-auto ${
-                  darkMode ? "bg-indigo-500" : "bg-indigo-400"
-                } rounded-full`}
-              ></div>
-            </motion.div>
+        {/* Contact Section */}
+<section
+  id="contact"
+  className={`py-12 sm:py-16 md:py-20 ${
+    darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+  }`}
+>
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    {/* Title Section */}
+    <motion.div
+      className="text-center mb-12 sm:mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+    >
+      <h2
+        className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
+          darkMode ? "text-indigo-400" : "text-indigo-600"
+        }`}
+      >
+        {tExtended.contact.title}
+      </h2>
+      <div
+        className={`h-1 w-20 sm:w-24 mx-auto ${
+          darkMode ? "bg-indigo-500" : "bg-indigo-400"
+        } rounded-full`}
+      ></div>
+    </motion.div>
 
-            {/* Timeline */}
-            <div className="relative">
-              {/* เส้นเวลา */}
-              <div
-                className={`absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-1 h-full ${
-                  darkMode ? "bg-indigo-500" : "bg-indigo-400"
-                } rounded-full`}
-              ></div>
-
-                            {/* รายการประสบการณ์ */}
-                            <div className="space-y-8 sm:space-y-12">
-                {tExtended.experience.items.map((exp, index) => (
-                  <motion.div
-                    key={index}
-                    className={`relative pl-12 sm:pl-0 ${
-                      index % 2 === 0 ? "sm:pr-8 sm:text-right" : "sm:pl-8"
-                    }`}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    {/* จุดบนเส้นเวลา */}
-                    <div
-                      className={`absolute top-4 left-0 sm:left-1/2 transform sm:-translate-x-1/2 w-6 h-6 rounded-full ${
-                        darkMode ? "bg-indigo-400" : "bg-indigo-500"
-                      } border-4 ${
-                        darkMode ? "border-gray-800" : "border-white"
-                      }`}
-                    ></div>
-
-                    {/* การ์ดประสบการณ์ */}
-                    <div
-                      className={`p-6 rounded-lg shadow-md ${
-                        darkMode ? "bg-gray-700" : "bg-gray-100"
-                      }`}
-                    >
-                      <h3
-                        className={`text-xl font-bold mb-1 ${
-                          darkMode ? "text-indigo-300" : "text-indigo-600"
-                        }`}
-                      >
-                        {exp.role}
-                      </h3>
-                      <p
-                        className={`text-lg font-medium mb-2 ${
-                          darkMode ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        {exp.company}
-                      </p>
-                      <p
-                        className={`text-sm mb-3 ${
-                          darkMode ? "text-gray-400" : "text-gray-600"
-                        }`}
-                      >
-                        {exp.period}
-                      </p>
-                      <p
-                        className={`${
-                          darkMode ? "text-gray-300" : "text-gray-600"
-                        }`}
-                      >
-                        {exp.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+    {/* Contact Content */}
+    <div className="flex flex-col lg:flex-row gap-8 sm:gap-12">
+      {/* Contact Info Card */}
+      <motion.div
+        className="w-full lg:w-1/2"
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <div className={`p-8 rounded-xl shadow-lg ${
+          darkMode ? "bg-gray-700" : "bg-gray-100"
+        } h-full`}>
+          <h3 className={`text-2xl font-bold mb-8 ${
+            darkMode ? "text-indigo-300" : "text-indigo-600"
+          }`}>
+            {lang === "th" ? "ข้อมูลติดต่อ" : "Contact Info"}
+          </h3>
+          
+          <div className="space-y-6">
+            {/* Email */}
+            <div className="flex items-start gap-4">
+              <div className={`p-3 rounded-full flex-shrink-0 ${
+                darkMode ? "bg-indigo-800 text-indigo-300" : "bg-indigo-100 text-indigo-600"
+              }`}>
+                <FaEnvelope className="text-xl" />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* เพิ่มส่วน Testimonials */}
-        <section
-          id="testimonials"
-          className={`py-12 sm:py-16 md:py-20 ${
-            darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-          }`}
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            {/* หัวข้อ Testimonials */}
-            <motion.div
-              className="text-center mb-12 sm:mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <h2
-                className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
-                  darkMode ? "text-indigo-400" : "text-indigo-600"
-                }`}
-              >
-                {tExtended.testimonials.title}
-              </h2>
-              {/* เส้นใต้หัวข้อ */}
-              <div
-                className={`h-1 w-20 sm:w-24 mx-auto ${
-                  darkMode ? "bg-indigo-500" : "bg-indigo-400"
-                } rounded-full`}
-              ></div>
-            </motion.div>
-
-            {/* การ์ดรีวิว */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {tExtended.testimonials.items.map((testimonial, index) => (
-                <TestimonialCard
-                  key={index}
-                  name={testimonial.name}
-                  role={testimonial.role}
-                  content={testimonial.content}
-                  avatar={wakim} // ใช้รูปโปรไฟล์แทน
-                  darkMode={darkMode}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ส่วน Contact */}
-        <section
-          id="contact"
-          className={`py-12 sm:py-16 md:py-20 ${
-            darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-          }`}
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            {/* หัวข้อ Contact */}
-            <motion.div
-              className="text-center mb-12 sm:mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <h2
-                className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
-                  darkMode ? "text-indigo-400" : "text-indigo-600"
-                }`}
-              >
-                {tExtended.contact.title}
-              </h2>
-              {/* เส้นใต้หัวข้อ */}
-              <div
-                className={`h-1 w-20 sm:w-24 mx-auto ${
-                  darkMode ? "bg-indigo-500" : "bg-indigo-400"
-                } rounded-full`}
-              ></div>
-            </motion.div>
-
-            {/* จัดวางแบบ Flex สำหรับหน้าจอใหญ่ */}
-            <div className="flex flex-col lg:flex-row gap-12 sm:gap-16">
-              {/* ข้อมูลติดต่อ */}
-              <motion.div
-                className="w-full lg:w-1/2"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <div className="space-y-8">
-                  <h3
-                    className={`text-2xl sm:text-3xl font-semibold ${
-                      darkMode ? "text-indigo-300" : "text-indigo-600"
-                    }`}
-                  >
-                    {lang === "th" ? "ข้อมูลติดต่อ" : "Contact Information"}
-                  </h3>
-
-                  {/* รายการข้อมูลติดต่อ */}
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div
-                        className={`p-3 rounded-full ${
-                          darkMode ? "bg-indigo-800" : "bg-indigo-100"
-                        }`}
-                      >
-                        <FaEnvelope
-                          className={`text-xl ${
-                            darkMode ? "text-indigo-300" : "text-indigo-600"
-                          }`}
-                        />
-                      </div>
-                      <div>
-                        <h4
-                          className={`text-lg font-medium ${
-                            darkMode ? "text-gray-300" : "text-gray-700"
-                          }`}
-                        >
-                          Email
-                        </h4>
-                        <a
-                          href={`mailto:${tExtended.contact.info.email}`}
-                          className={`${
-                            darkMode ? "text-indigo-400" : "text-indigo-600"
-                          } hover:underline`}
-                        >
-                          {tExtended.contact.info.email}
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div
-                        className={`p-3 rounded-full ${
-                          darkMode ? "bg-indigo-800" : "bg-indigo-100"
-                        }`}
-                      >
-                        <FaPhone
-                          className={`text-xl ${
-                            darkMode ? "text-indigo-300" : "text-indigo-600"
-                          }`}
-                        />
-                      </div>
-                      <div>
-                        <h4
-                          className={`text-lg font-medium ${
-                            darkMode ? "text-gray-300" : "text-gray-700"
-                          }`}
-                        >
-                          {lang === "th" ? "โทรศัพท์" : "Phone"}
-                        </h4>
-                        <a
-                          href={`tel:${tExtended.contact.info.phone.replace(
-                            / /g,
-                            ""
-                          )}`}
-                          className={`${
-                            darkMode ? "text-indigo-400" : "text-indigo-600"
-                          } hover:underline`}
-                        >
-                          {tExtended.contact.info.phone}
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div
-                        className={`p-3 rounded-full ${
-                          darkMode ? "bg-indigo-800" : "bg-indigo-100"
-                        }`}
-                      >
-                        <FaMapMarkerAlt
-                          className={`text-xl ${
-                            darkMode ? "text-indigo-300" : "text-indigo-600"
-                          }`}
-                        />
-                      </div>
-                      <div>
-                        <h4
-                          className={`text-lg font-medium ${
-                            darkMode ? "text-gray-300" : "text-gray-700"
-                          }`}
-                        >
-                          {lang === "th" ? "ที่อยู่" : "Location"}
-                        </h4>
-                        <p
-                          className={`${
-                            darkMode ? "text-gray-400" : "text-gray-600"
-                          }`}
-                        >
-                          {tExtended.contact.info.location}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Social Media Links */}
-                  <div className="pt-4">
-                    <h4
-                      className={`text-lg font-medium mb-4 ${
-                        darkMode ? "text-gray-300" : "text-gray-700"
-                      }`}
-                    >
-                      {lang === "th" ? "ติดตามฉันได้ที่" : "Follow me on"}
-                    </h4>
-                    <div className="flex gap-4">
-                      <a
-                        href="https://github.com/Teekon789"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-3 rounded-full ${
-                          darkMode ? "bg-gray-700" : "bg-gray-200"
-                        } hover:bg-indigo-500 hover:text-white transition-colors`}
-                      >
-                        <FaGithub className="text-xl" />
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-3 rounded-full ${
-                          darkMode ? "bg-gray-700" : "bg-gray-200"
-                        } hover:bg-blue-600 hover:text-white transition-colors`}
-                      >
-                        <FaLinkedin className="text-xl" />
-                      </a>
-                      <a
-                        href="https://twitter.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-3 rounded-full ${
-                          darkMode ? "bg-gray-700" : "bg-gray-200"
-                        } hover:bg-blue-400 hover:text-white transition-colors`}
-                      >
-                        <FaTwitter className="text-xl" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* แบบฟอร์มติดต่อ */}
-              <motion.div
-                className="w-full lg:w-1/2"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <form
-                  onSubmit={handleSubmitContact}
-                  className={`p-6 sm:p-8 rounded-xl shadow-lg ${
-                    darkMode ? "bg-gray-700" : "bg-gray-100"
-                  }`}
+              <div className="min-w-[80px]">
+                <h4 className={`text-lg font-medium ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                } mb-2`}>
+                  Email
+                </h4>
+              </div>
+              <div>
+                <a 
+                  href="mailto:teeboy789456@gmail.com"
+                  className={`text-base ${
+                    darkMode ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-800"
+                  } transition-colors break-all`}
                 >
-                  <div className="space-y-6">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className={`block mb-2 text-sm font-medium ${
-                          darkMode ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        {tExtended.contact.name}
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        className={`w-full px-4 py-3 rounded-lg ${
-                          darkMode
-                            ? "bg-gray-600 border-gray-500 text-white"
-                            : "bg-white border-gray-300"
-                        } border focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition`}
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className={`block mb-2 text-sm font-medium ${
-                          darkMode ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        {tExtended.contact.email}
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        className={`w-full px-4 py-3 rounded-lg ${
-                          darkMode
-                            ? "bg-gray-600 border-gray-500 text-white"
-                            : "bg-white border-gray-300"
-                        } border focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition`}
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="message"
-                        className={`block mb-2 text-sm font-medium ${
-                          darkMode ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        {tExtended.contact.message}
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows="5"
-                        required
-                        className={`w-full px-4 py-3 rounded-lg ${
-                          darkMode
-                            ? "bg-gray-600 border-gray-500 text-white"
-                            : "bg-white border-gray-300"
-                        } border focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition`}
-                      ></textarea>
-                    </div>
-
-                    <motion.button
-                      type="submit"
-                      className={`w-full py-3 px-6 rounded-lg font-semibold ${
-                        darkMode
-                          ? "bg-indigo-600 hover:bg-indigo-700"
-                          : "bg-indigo-500 hover:bg-indigo-600"
-                      } text-white transition-colors`}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {tExtended.contact.send}
-                    </motion.button>
-                  </div>
-                </form>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer
-          className={`py-8 ${
-            darkMode ? "bg-gray-900 text-gray-400" : "bg-gray-100 text-gray-600"
-          }`}
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="mb-4 md:mb-0">
-                <p className="text-sm sm:text-base">
-                  {tExtended.footer.copyright}
-                </p>
+                  teeboy789456@gmail.com
+                </a>
               </div>
-              <div className="flex items-center space-x-4">
-                <p className="text-sm sm:text-base">
-                  {tExtended.footer.madeWith}
+            </div>
+
+            {/* Phone */}
+            <div className="flex items-start gap-4">
+              <div className={`p-3 rounded-full flex-shrink-0 ${
+                darkMode ? "bg-indigo-800 text-indigo-300" : "bg-indigo-100 text-indigo-600"
+              }`}>
+                <FaPhone className="text-xl" />
+              </div>
+              <div className="min-w-[80px]">
+                <h4 className={`text-lg font-medium ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                } mb-2`}>
+                  {lang === "th" ? "โทรศัพท์" : "Phone"}
+                </h4>
+              </div>
+              <div>
+                <a 
+                  href="tel:+66123456789"
+                  className={`text-base ${
+                    darkMode ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-800"
+                  } transition-colors`}
+                >
+                  +66 12 345 6789
+                </a>
+              </div>
+            </div>
+
+            {/* Location */}
+            <div className="flex items-start gap-4">
+              <div className={`p-3 rounded-full flex-shrink-0 ${
+                darkMode ? "bg-indigo-800 text-indigo-300" : "bg-indigo-100 text-indigo-600"
+              }`}>
+                <FaMapMarkerAlt className="text-xl" />
+              </div>
+              <div className="min-w-[80px]">
+                <h4 className={`text-lg font-medium ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                } mb-2`}>
+                  {lang === "th" ? "ที่อยู่" : "Location"}
+                </h4>
+              </div>
+              <div>
+                <p className={`text-base ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}>
+                  กรุงเทพมหานคร, ประเทศไทย
                 </p>
               </div>
             </div>
           </div>
-        </footer>
+        </div>
+      </motion.div>
 
-        {/* ปุ่มเลื่อนขึ้นด้านบน */}
+      {/* Social Media Section */}
+      <motion.div
+        className="w-full lg:w-1/2"
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        viewport={{ once: true }}
+      >
+        <div className={`p-8 rounded-xl shadow-lg ${
+          darkMode ? "bg-gray-700" : "bg-gray-100"
+        } h-full flex flex-col`}>
+          <h3 className={`text-2xl font-bold mb-8 ${
+            darkMode ? "text-indigo-300" : "text-indigo-600"
+          }`}>
+            {lang === "th" ? "ช่องทางติดตาม" : "Follow Me"}
+          </h3>
+          
+          <div className="flex-1 flex flex-col justify-center">
+            <p className={`text-lg mb-8 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}>
+              {lang === "th" 
+                ? "ติดตามผลงานและกิจกรรมล่าสุดของฉันได้ผ่านช่องทางเหล่านี้" 
+                : "Follow my latest works and activities through these channels"}
+            </p>
+            
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+              {/* GitHub */}
+              <a
+                href="https://github.com/Teekon789"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-3 px-5 py-3 rounded-lg transition-colors ${
+                  darkMode 
+                    ? "bg-gray-600 hover:bg-gray-500" 
+                    : "bg-gray-200 hover:bg-gray-300"
+                }`}
+              >
+                <FaGithub className="text-xl" />
+                <span>GitHub</span>
+              </a>
+              
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-3 px-5 py-3 rounded-lg transition-colors ${
+                  darkMode 
+                    ? "bg-blue-800 hover:bg-blue-700" 
+                    : "bg-blue-100 hover:bg-blue-200"
+                }`}
+              >
+                <FaLinkedin className="text-xl" />
+                <span>LinkedIn</span>
+              </a>
+              
+              {/* Twitter */}
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-3 px-5 py-3 rounded-lg transition-colors ${
+                  darkMode 
+                    ? "bg-blue-400/10 hover:bg-blue-400/20" 
+                    : "bg-blue-100 hover:bg-blue-200"
+                }`}
+              >
+                <FaTwitter className="text-xl" />
+                <span>Twitter</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
+
+        {/* Scroll to Top Button */}
         <AnimatePresence>
           {showScrollTop && (
             <motion.button
