@@ -101,7 +101,7 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
             ))}
           </div>
 
-          {/* ปุ่มควบคุม (ที่ย้ายมาจากเดิม) - สำหรับหน้าจอขนาดใหญ่ */}
+          {/* ปุ่มควบคุม - สำหรับหน้าจอขนาดใหญ่ */}
           <div className="hidden md:flex items-center space-x-4">
             {/* ปุ่มเปลี่ยน Dark/Light Mode */}
             <button
