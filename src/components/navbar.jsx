@@ -156,6 +156,20 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
               )}
             </button>
 
+             {/* ปุ่มเปลี่ยนภาษา */}
+            
+             <button
+                onClick={toggleLanguage}
+                className={`text-sm px-4 py-1 rounded-full cursor-pointer w-full text-left ${
+                  darkMode
+                    ? "bg-gray-700 text-white hover:bg-gray-600"
+                    : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                }`}
+              >
+                {lang === "th" ? "English" : "ภาษาไทย"}
+              </button>
+   
+
             {/* ปุ่มเมนู */}
             <button
               onClick={toggleMenu}
@@ -172,6 +186,8 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
                 <FiMenu className="h-6 w-6" />
               )}
             </button>
+            
+
           </div>
         </div>
       </div>
@@ -202,19 +218,7 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
               </a>
             ))}
             
-            {/* ปุ่มเปลี่ยนภาษาในเมนูมือถือ */}
-            <div className="px-3 py-2">
-              <button
-                onClick={toggleLanguage}
-                className={`text-sm px-4 py-1 rounded-full cursor-pointer w-full text-left ${
-                  darkMode
-                    ? "bg-gray-700 text-white hover:bg-gray-600"
-                    : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                }`}
-              >
-                {lang === "th" ? "English" : "ภาษาไทย"}
-              </button>
-            </div>
+           
           </div>
         </motion.div>
       )}
