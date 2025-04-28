@@ -19,6 +19,9 @@ import mn_2 from "./assets/mn_2.png";
 import wakim from "./assets/wakim.jpg";
 import resumeFile from "./assets/Resume.pdf";
 import Navbar from "./components/navbar";
+import Scrollup from "./components/scrollup";
+
+import { TypeAnimation } from "react-type-animation";
 
 // แยกข้อความภาษาไทย
 import textTH from "./lang/th";
@@ -94,11 +97,80 @@ export default function Portfolio() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {t.greeting}{" "}
           <span
-            className={`${darkMode ? "text-indigo-400" : "text-indigo-600"}`}
+            className={`
+  inline-block
+  ${
+    darkMode
+      ? "bg-gradient-to-br from-purple-400 via-pink-400 to-red-400"
+      : "bg-gradient-to-br from-purple-600 via-pink-600 to-red-600"
+  }
+  bg-clip-text 
+  text-transparent
+  font-bold
+  transition-all 
+  duration-300
+  hover:scale-105
+  ${
+    darkMode
+      ? "drop-shadow-[0_2px_2px_rgba(236,72,153,0.3)]"
+      : "drop-shadow-[0_2px_2px_rgba(219,39,119,0.3)]"
+  }
+`}
           >
-            {t.fullname}
+            {t.greeting}
+          </span>{" "}
+          <span
+            className={`
+    relative 
+    inline-block
+    ${
+      darkMode
+        ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
+        : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+    }
+    bg-clip-text 
+    text-transparent
+    transition-all 
+    duration-300
+    hover:scale-105
+  `}
+            // bg-gradient-to-r = สร้างไล่สีจากซ้ายไปขวา
+            // bg-clip-text = ให้สีไล่เฉพาะตัวอักษร
+            // text-transparent = ทำให้ตัวอักษรโปร่งใสเพื่อให้เห็น gradient
+          >
+            <TypeAnimation
+              key={`${t.language}-${t.fullname}`}
+              sequence={[t.fullname, 1000, "", 500]}
+              wrapper="span"
+              speed={50}
+              style={{
+                display: "inline-block",
+                textShadow: darkMode
+                  ? "0 0 20px rgba(129, 140, 248, 0.5)"
+                  : "0 0 20px rgba(79, 70, 229, 0.3)",
+              }}
+              repeat={Infinity}
+            />
+
+            {/* เส้น underline with animation */}
+            <span
+              className={`
+    absolute 
+    bottom-0 
+    left-0 
+    w-0 
+    h-0.5 
+    transition-all 
+    duration-300 
+    group-hover:w-full
+    ${
+      darkMode
+        ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
+        : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+    }
+  `}
+            ></span>
           </span>
         </motion.h1>
 
@@ -224,63 +296,53 @@ export default function Portfolio() {
                   } shadow-md w-full text-left`}
                 >
                   <div className="space-y-4 sm:space-y-6">
-                    {/* รายการการศึกษา */}
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+                    {/* วนซ้ำผ่านรายการข้อมูล*/}
+                    {[
+                      {
+                        icon: (
+                          <FaGraduationCap className="text-xl sm:text-2xl" />
+                        ),
+                        title: t.about.education,
+                        description: t.about.major,
+                      },
+                      {
+                        icon: <FaUniversity className="text-xl sm:text-2xl" />,
+                        title: t.about.university_name,
+                        description: t.about.university,
+                      },
+                      // เพิ่มรายการเพิ่มเติม
+                    ].map((item, index) => (
                       <div
-                        className={`w-10 h-10 flex items-center justify-center rounded-lg ${
-                          darkMode
-                            ? "bg-indigo-800 text-indigo-200"
-                            : "bg-indigo-100 text-indigo-600"
-                        }`}
+                        key={index}
+                        className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full"
                       >
-                        <FaGraduationCap className="text-xl sm:text-2xl" />
-                      </div>
-                      <div className="w-full">
-                        <h3
-                          className={`text-lg sm:text-xl font-semibold ${
-                            darkMode ? "text-indigo-300" : "text-indigo-600"
+                        <div
+                          className={`w-10 h-10 flex items-center justify-center rounded-lg ${
+                            darkMode
+                              ? "bg-indigo-800 text-indigo-200"
+                              : "bg-indigo-100 text-indigo-600"
                           }`}
                         >
-                          {t.about.education}
-                        </h3>
-                        <p
-                          className={`mt-1 text-sm sm:text-base ${
-                            darkMode ? "text-gray-400" : "text-gray-600"
-                          }`}
-                        >
-                          {t.about.major}
-                        </p>
+                          {item.icon}
+                        </div>
+                        <div className="w-full">
+                          <h3
+                            className={`text-lg sm:text-xl font-semibold ${
+                              darkMode ? "text-indigo-300" : "text-indigo-600"
+                            }`}
+                          >
+                            {item.title}
+                          </h3>
+                          <p
+                            className={`mt-1 text-sm sm:text-base ${
+                              darkMode ? "text-gray-400" : "text-gray-600"
+                            }`}
+                          >
+                            {item.description}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-
-                    {/* รายการมหาวิทยาลัย */}
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
-                      <div
-                        className={`w-10 h-10 flex items-center justify-center rounded-lg ${
-                          darkMode
-                            ? "bg-indigo-800 text-indigo-200"
-                            : "bg-indigo-100 text-indigo-600"
-                        }`}
-                      >
-                        <FaUniversity className="text-xl sm:text-2xl" />
-                      </div>
-                      <div className="w-full">
-                        <h3
-                          className={`text-lg sm:text-xl font-semibold ${
-                            darkMode ? "text-indigo-300" : "text-indigo-600"
-                          }`}
-                        >
-                          {t.about.university_name}
-                        </h3>
-                        <p
-                          className={`mt-1 text-sm sm:text-base ${
-                            darkMode ? "text-gray-400" : "text-gray-600"
-                          }`}
-                        >
-                          {t.about.university}
-                        </p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 
@@ -463,67 +525,74 @@ export default function Portfolio() {
       </section>
 
       {/* ส่วน Contact */}
-<section
-  id="contact"
-  className={`container mx-auto px-4 py-16 md:py-24 ${
-    darkMode ? "text-gray-100" : "text-gray-800"
-  }`}
->
-  <div className="max-w-4xl mx-auto">
-    {/* หัวข้อส่วนติดต่อ */}
-    <motion.h2 
-      className="text-2xl md:text-3xl font-bold text-center mb-12"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      {t.contactMe}
-      <div className={`h-1 w-24 mx-auto mt-4 rounded-full ${
-        darkMode ? "bg-indigo-500" : "bg-indigo-400"
-      }`}></div>
-    </motion.h2>
-
-    {/* ไอคอนติดต่อ - แสดงชื่อเมื่อ hover */}
-    <div className="flex justify-center flex-wrap gap-8">
-      {contactLinks.map((contact, index) => (
-        <motion.div
-          key={index}
-          className="relative group"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ delay: index * 0.1 }}
-          viewport={{ once: true }}
-        >
-          <a
-            href={contact.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block"
+      <section
+        id="contact"
+        className={`container mx-auto px-4 py-16 md:py-24 ${
+          darkMode ? "text-gray-100" : "text-gray-800"
+        }`}
+      >
+        <div className="max-w-4xl mx-auto">
+          {/* หัวข้อส่วนติดต่อ */}
+          <motion.h2
+            className="text-2xl md:text-3xl font-bold text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
           >
-            <contact.icon
-              className={`w-10 h-10 transition-all duration-300 hover:scale-110 ${
-                darkMode
-                  ? "text-gray-300 hover:text-gray-200"
-                  : "text-gray-700 hover:text-gray-800"
+            {t.contactMe}
+            <div
+              className={`h-1 w-24 mx-auto mt-4 rounded-full ${
+                darkMode ? "bg-indigo-500" : "bg-indigo-400"
               }`}
-            />
-          </a>
-          
-          {/* Tooltip ชื่อ */}
-          <div className={`
+            ></div>
+          </motion.h2>
+
+          {/* ไอคอนติดต่อ - แสดงชื่อเมื่อ hover */}
+          <div className="flex justify-center flex-wrap gap-8">
+            {contactLinks.map((contact, index) => (
+              <motion.div
+                key={index}
+                className="relative group"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <a
+                  href={contact.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <contact.icon
+                    className={`w-10 h-10 transition-all duration-300 hover:scale-110 ${
+                      darkMode
+                        ? "text-gray-300 hover:text-gray-200"
+                        : "text-gray-700 hover:text-gray-800"
+                    }`}
+                  />
+                </a>
+
+                {/* Tooltip ชื่อ */}
+                <div
+                  className={`
             absolute -bottom-8 left-1/2 transform -translate-x-1/2
             opacity-0 group-hover:opacity-100 transition-opacity duration-200
             text-sm whitespace-nowrap
             ${darkMode ? "text-gray-300" : "text-gray-600"}
-          `}>
-            {contact.name}
+          `}
+                >
+                  {contact.name}
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
+
+      {/* ปุ่มเลื่อนขึ้นด้านบน */}
+      <Scrollup darkMode={darkMode} lang={lang} />
     </div>
   );
 }
