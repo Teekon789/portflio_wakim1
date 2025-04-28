@@ -37,6 +37,10 @@ const textTH = {
     projects: "ผลงาน",
     contact: "ติดต่อ",
   },
+  // Language switcher
+  Scrollup: {
+    scrollToTop: "เลื่อนขึ้นไปด้านบน",
+  },
 
 };
 

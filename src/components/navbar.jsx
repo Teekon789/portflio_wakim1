@@ -6,7 +6,7 @@ import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
   // สร้าง state สำหรับเปิด/ปิด mobile menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   // สร้าง state เพื่อตรวจสอบการเลื่อนหน้า
   const [scrolled, setScrolled] = useState(false);
 
@@ -41,7 +41,7 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    
+
     // Cleanup event listener เมื่อ component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -75,13 +75,30 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center py-4 md:py-5">
           {/* โลโก้ */}
-          <a 
-            href="#home" 
-            className={`text-xl font-bold ${
+          <a
+            href="#home"
+            className={`text-2xl font-bold inline-block ${
               darkMode ? "text-indigo-400" : "text-indigo-600"
             }`}
           >
-            {t.fullname}
+            <div className="relative inline-block overflow-visible transition-all duration-300 hover:transform hover:scale-105">
+              <span className="relative z-10">My</span>
+              <span>
+                Port
+                <span
+                  className={`${
+                    darkMode ? "text-indigo-300" : "text-indigo-500"
+                  }`}
+                >
+                  folio
+                </span>
+              </span>
+              <span
+                className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 hover:w-full ${
+                  darkMode ? "bg-indigo-300" : "bg-indigo-500"
+                }`}
+              ></span>
+            </div>
           </a>
 
           {/* เมนูสำหรับหน้าจอขนาดใหญ่ (desktop) */}
@@ -90,13 +107,18 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
               <a
                 key={index}
                 href={item.href}
-                className={`text-sm font-medium transition-colors duration-300 ${
+                className={`text-sm font-medium relative px-1 py-2 overflow-hidden transition-all duration-300 group ${
                   darkMode
-                    ? "text-gray-300 hover:text-indigo-400"
+                    ? "text-gray-300 hover:text-indigo-300"
                     : "text-gray-700 hover:text-indigo-600"
                 }`}
               >
-                {item.name}
+                <span className="relative z-10">{item.name}</span>
+                <span
+                  className={`absolute bottom-0 left-1/2 w-0 h-0.5 -translate-x-1/2 transition-all duration-300 group-hover:w-full ${
+                    darkMode ? "bg-indigo-400" : "bg-indigo-500"
+                  }`}
+                ></span>
               </a>
             ))}
           </div>
@@ -156,19 +178,18 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
               )}
             </button>
 
-             {/* ปุ่มเปลี่ยนภาษา */}
-            
-             <button
-                onClick={toggleLanguage}
-                className={`text-sm px-4 py-1 rounded-full cursor-pointer w-full text-left ${
-                  darkMode
-                    ? "bg-gray-700 text-white hover:bg-gray-600"
-                    : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                }`}
-              >
-                {lang === "th" ? "English" : "ภาษาไทย"}
-              </button>
-   
+            {/* ปุ่มเปลี่ยนภาษา */}
+
+            <button
+              onClick={toggleLanguage}
+              className={`text-sm px-4 py-1 rounded-full cursor-pointer w-full text-left ${
+                darkMode
+                  ? "bg-gray-700 text-white hover:bg-gray-600"
+                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+              }`}
+            >
+              {lang === "th" ? "English" : "ภาษาไทย"}
+            </button>
 
             {/* ปุ่มเมนู */}
             <button
@@ -186,8 +207,6 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
                 <FiMenu className="h-6 w-6" />
               )}
             </button>
-            
-
           </div>
         </div>
       </div>
@@ -217,8 +236,6 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
                 {item.name}
               </a>
             ))}
-            
-           
           </div>
         </motion.div>
       )}

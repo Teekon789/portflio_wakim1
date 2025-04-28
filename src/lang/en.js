@@ -39,6 +39,10 @@ const textEN = {
     projects: "Projects",
     contact: "Contact",
   },
+  // Language switcher
+  Scrollup: {
+    scrollToTop: "Scroll to Top",
+  },
 };
 
 export default textEN;
