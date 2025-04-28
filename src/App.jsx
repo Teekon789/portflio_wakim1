@@ -39,6 +39,7 @@ export default function Portfolio() {
     document.body.removeChild(link);
   };
 
+  // รายการโปรเจกต์
   const projects = [
     {
       title: t.projects_name.title,
@@ -46,6 +47,20 @@ export default function Portfolio() {
       demo: "https://egovtrip.vercel.app/",
       code: "https://github.com/Teekon789/my-nextjs-project",
       image: mn_2,
+    },
+  ];
+
+  // รายการช่องทางติดต่อ
+  const contactLinks = [
+    {
+      name: "GitHub",
+      url: "https://github.com/Teekon789",
+      icon: FaGithub,
+    },
+    {
+      name: "Email",
+      url: "https://mail.google.com/mail/?view=cm&fs=1&to=teeboy789456@gmail.com",
+      icon: FaEnvelope,
     },
   ];
 
@@ -69,12 +84,12 @@ export default function Portfolio() {
       {/* ส่วน Hero */}
       <section
         id="home"
-        className={`flex flex-col items-center justify-center text-center pt-16 pb-12 sm:py-20 px-4 ${
+        className={`flex flex-col items-center justify-center min-h-screen text-center px-4 ${
           darkMode ? "text-white" : "text-gray-800"
         }`}
       >
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -86,9 +101,10 @@ export default function Portfolio() {
             {t.fullname}
           </span>
         </motion.h1>
+
         <motion.p
-          className={`text-base sm:text-lg md:text-xl max-w-md sm:max-w-xl mb-6 ${
-            darkMode ? "text-gray-400" : "text-gray-600"
+          className={`text-lg sm:text-xl md:text-2xl max-w-md sm:max-w-xl mb-8 ${
+            darkMode ? "text-gray-300" : "text-gray-600"
           }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -96,13 +112,37 @@ export default function Portfolio() {
         >
           {t.role}
         </motion.p>
-        <motion.a
-          href="#projects"
-          className="bg-indigo-500 hover:bg-indigo-600 px-5 sm:px-6 py-2 rounded-full text-white font-semibold transition text-sm sm:text-base"
-          whileHover={{ scale: 1.05 }}
+
+        {/* ปุ่มกดทั้งหมด (Button Container) */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
         >
-          {t.viewProjects}
-        </motion.a>
+          <motion.a
+            href="#projects"
+            className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded-full text-white font-semibold transition-all shadow-lg hover:shadow-xl text-base sm:text-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {t.viewProjects}
+          </motion.a>
+
+          <motion.a
+            href="#contact"
+            className={`px-8 py-3 rounded-full font-semibold border-2 text-base sm:text-lg
+      ${
+        darkMode
+          ? "border-gray-300 text-gray-300 hover:bg-gray-300 hover:text-gray-900"
+          : "border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white"
+      } transition-all shadow-lg hover:shadow-xl`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {t.contactMe}
+          </motion.a>
+        </motion.div>
       </section>
 
       {/* ส่วน About Me */}
@@ -423,46 +463,67 @@ export default function Portfolio() {
       </section>
 
       {/* ส่วน Contact */}
-      <section
-        className={`px-4 sm:px-6 py-12 sm:py-16 md:py-20 ${
-          darkMode ? "text-white" : "text-gray-800"
-        }`}
-      >
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8">
-          {t.contactMe}
-          <div
-            className={`h-1 w-20 mx-auto my-3  ${
-              darkMode ? "bg-indigo-500" : "bg-indigo-400"
-            } rounded-full`}
-          ></div>
-        </h2>
-        <div className="flex justify-center space-x-4 sm:space-x-6">
+<section
+  id="contact"
+  className={`container mx-auto px-4 py-16 md:py-24 ${
+    darkMode ? "text-gray-100" : "text-gray-800"
+  }`}
+>
+  <div className="max-w-4xl mx-auto">
+    {/* หัวข้อส่วนติดต่อ */}
+    <motion.h2 
+      className="text-2xl md:text-3xl font-bold text-center mb-12"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+    >
+      {t.contactMe}
+      <div className={`h-1 w-24 mx-auto mt-4 rounded-full ${
+        darkMode ? "bg-indigo-500" : "bg-indigo-400"
+      }`}></div>
+    </motion.h2>
+
+    {/* ไอคอนติดต่อ - แสดงชื่อเมื่อ hover */}
+    <div className="flex justify-center flex-wrap gap-8">
+      {contactLinks.map((contact, index) => (
+        <motion.div
+          key={index}
+          className="relative group"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: index * 0.1 }}
+          viewport={{ once: true }}
+        >
           <a
-            href="https://github.com/Teekon789"
+            href={contact.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:opacity-80 transition-opacity"
+            className="block"
           >
-            <FaGithub
-              className={`w-6 h-6 ${
-                darkMode ? "text-gray-200" : "text-gray-800"
+            <contact.icon
+              className={`w-10 h-10 transition-all duration-300 hover:scale-110 ${
+                darkMode
+                  ? "text-gray-300 hover:text-gray-200"
+                  : "text-gray-700 hover:text-gray-800"
               }`}
             />
           </a>
-          <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=teeboy789456@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:opacity-80 transition-opacity"
-          >
-            <FaEnvelope
-              className={`w-6 h-6 ${
-                darkMode ? "text-gray-200" : "text-gray-800"
-              }`}
-            />
-          </a>
-        </div>
-      </section>
+          
+          {/* Tooltip ชื่อ */}
+          <div className={`
+            absolute -bottom-8 left-1/2 transform -translate-x-1/2
+            opacity-0 group-hover:opacity-100 transition-opacity duration-200
+            text-sm whitespace-nowrap
+            ${darkMode ? "text-gray-300" : "text-gray-600"}
+          `}>
+            {contact.name}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
     </div>
   );
 }
