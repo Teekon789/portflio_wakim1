@@ -41,7 +41,6 @@ const textEN = {
     contact: "Contact",
   },
   nameservices: "Services",
-  
 
   // Language switcher
   Scrollup: {
