@@ -1,9 +1,19 @@
 {/* ส่วน Services Component - แสดงบริการและความเชี่ยวชาญ */}
 import { motion } from "framer-motion";
 import { FaCode, FaDatabase, FaTools, FaServer, FaMobileAlt, FaPaintBrush } from "react-icons/fa";
+import { useState, useEffect } from "react";
 
-const Services = ({ darkMode, t }) => {
-  // รายการบริการและความเชี่ยวชาญ
+// แยกข้อความภาษาไทย
+import textTH from "../lang/th";
+import textEN from "../lang/en";
+
+
+const Services = ({ darkMode, lang }) => {
+
+   // แยกข้อความตามภาษา
+   const t = lang === "th" ? textTH : textEN;
+
+    // รายการบริการและความเชี่ยวชาญ
   const servicesList = [
     {
       icon: <FaCode className="text-2xl sm:text-3xl" />,
@@ -58,7 +68,7 @@ const Services = ({ darkMode, t }) => {
                 darkMode ? "text-white" : "text-gray-800"
             }`}
             >
-            {t.services?.title || "บริการ"}
+            {t.nameservices}
             </h2>
           {/* เส้นใต้หัวข้อ */}
           <div

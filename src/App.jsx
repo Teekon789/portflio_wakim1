@@ -445,7 +445,10 @@ export default function Portfolio() {
         </Marquee>
       </div>
 
-      <Services darkMode={darkMode} t={t} />
+      {/* ส่วน Services */}
+      <Services darkMode={darkMode} lang={lang} t={t} />
+
+      {/* ส่วน Education */}
 
       {/* ส่วน Projects */}
       <section

@@ -40,6 +40,8 @@ const textEN = {
     projects: "Projects",
     contact: "Contact",
   },
+  nameservices: "Services",
+
   // Language switcher
   Scrollup: {
     scrollToTop: "Scroll to Top",
