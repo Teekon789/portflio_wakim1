@@ -36,6 +36,7 @@ const textEN = {
     home: "Home",
     about: "About",
     skills: "Skills",
+    services: "Services",
     projects: "Projects",
     contact: "Contact",
   },
