@@ -53,6 +53,7 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
     { name: t.nav.home, href: "#home" },
     { name: t.nav.about, href: "#about" },
     { name: t.nav.skills, href: "#skills" },
+    { name: t.nav.services, href: "#services" }, 
     { name: t.nav.projects, href: "#projects" },
     { name: t.nav.contact, href: "#contact" },
   ];

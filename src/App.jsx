@@ -20,6 +20,7 @@ import wakim from "./assets/wakim.jpg";
 import resumeFile from "./assets/Resume.pdf";
 import Navbar from "./components/navbar";
 import Scrollup from "./components/scrollup";
+import Services from "./components/Services";
 
 import { TypeAnimation } from "react-type-animation";
 
@@ -28,9 +29,9 @@ import textTH from "./lang/th";
 import textEN from "./lang/en";
 
 export default function Portfolio() {
-  const [lang, setLang] = useState("th");
+  const [lang, setLang] = useState("en");
   const [darkMode, setDarkMode] = useState(true);
-  const t = lang === "th" ? textTH : textEN;
+  const t = lang === "en" ? textEN : textTH;
 
   // ฟังก์ชันดาวน์โหลดเรซูเม่
   const handleDownloadResume = () => {
@@ -92,7 +93,7 @@ export default function Portfolio() {
         }`}
       >
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -443,6 +444,8 @@ export default function Portfolio() {
           </div>
         </Marquee>
       </div>
+
+      <Services darkMode={darkMode} t={t} />
 
       {/* ส่วน Projects */}
       <section

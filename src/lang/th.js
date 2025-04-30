@@ -34,6 +34,7 @@ const textTH = {
     home: "หน้าแรก",
     about: "เกี่ยวกับ",
     skills: "ทักษะ",
+    services: "บริการ",
     projects: "ผลงาน",
     contact: "ติดต่อ",
   },
@@ -42,6 +43,32 @@ const textTH = {
     scrollToTop: "เลื่อนขึ้นไปด้านบน",
   },
 
+  services: {
+    webdev: {
+      title: "ซอฟต์แวร์และการพัฒนาเว็บไซต์",
+      desc: "พัฒนาเว็บไซต์ด้วย React, Next.js, Vue.js และ Nuxt.js พร้อมการใช้ Tailwind CSS และ TypeScript สำหรับแอปพลิเคชันที่มีประสิทธิภาพและรองรับทุกอุปกรณ์",
+    },
+    database: {
+      title: "ฐานข้อมูล",
+      desc: "ออกแบบและจัดการฐานข้อมูลทั้งแบบ SQL และ NoSQL เพื่อจัดเก็บข้อมูลอย่างมีประสิทธิภาพและปลอดภัย",
+    },
+    backend: {
+      title: "การพัฒนา Backend",
+      desc: "พัฒนา API และระบบ Backend ด้วย Node.js, Express เพื่อรองรับการทำงานของแอปพลิเคชัน",
+    },
+    mobile: {
+      title: "การพัฒนาแอปพลิเคชันมือถือ",
+      desc: "พัฒนาแอปพลิเคชันมือถือแบบ Cross-platform ด้วย React Native สำหรับทั้ง iOS และ Android",
+    },
+    design: {
+      title: "การออกแบบ UI/UX",
+      desc: "ออกแบบส่วนติดต่อผู้ใช้ที่สวยงามและใช้งานง่าย ด้วยหลักการ UX/UI ที่ทันสมัย",
+    },
+    devtools: {
+      title: "เครื่องมือและเทคโนโลยีการพัฒนา",
+      desc: "ใช้เครื่องมือต่างๆ เพื่อเพิ่มประสิทธิภาพในกระบวนการพัฒนาซอฟต์แวร์",
+    },
+  },
 };
 
 export default textTH;
