@@ -12,6 +12,7 @@ const textEN = {
   contactMe: "Contact Me",
   copyright: "All rights reserved.",
   skills: "My Skills",
+  skillsDesc:"Here are the technologies and tools I specialize in for development projects.",
 
   about: {
     title: "About Me",
@@ -69,6 +70,10 @@ const textEN = {
     },
     devtools: {
       title: "Development Tools and Technologies",
+      desc: "Proficient in using various tools to enhance the software development process.",
+    },
+    tools: {
+      title: "Tools and Technologies",
       desc: "Proficient in using various tools to enhance the software development process.",
     },
   },

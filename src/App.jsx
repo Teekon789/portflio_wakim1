@@ -3,26 +3,16 @@ import { motion } from "framer-motion";
 import {
   FaGithub,
   FaEnvelope,
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaReact,
-  FaVuejs,
   FaDownload,
-  FaGraduationCap,
-  FaUniversity,
 } from "react-icons/fa";
-import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
-import { SiNuxtdotjs } from "react-icons/si";
-import Marquee from "react-fast-marquee";
+import { TypeAnimation } from "react-type-animation";
 import mn_2 from "./assets/mn_2.png";
 import wakim from "./assets/wakim.jpg";
-import resumeFile from "./assets/Resume.pdf";
 import Navbar from "./components/navbar";
 import Scrollup from "./components/scrollup";
 import Services from "./components/Services";
-
-import { TypeAnimation } from "react-type-animation";
+import Skills from "./components/Skills";
+import AboutMe from "./components/AboutMe"; 
 
 // แยกข้อความภาษาไทย
 import textTH from "./lang/th";
@@ -32,16 +22,6 @@ export default function Portfolio() {
   const [lang, setLang] = useState("en");
   const [darkMode, setDarkMode] = useState(true);
   const t = lang === "en" ? textEN : textTH;
-
-  // ฟังก์ชันดาวน์โหลดเรซูเม่
-  const handleDownloadResume = () => {
-    const link = document.createElement("a");
-    link.href = resumeFile; // เปลี่ยนเป็นที่อยู่ของไฟล์เรซูเม่
-    link.download = "Resume.pdf"; // ชื่อไฟล์เมื่อดาวน์โหลด
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   // รายการโปรเจกต์
   const projects = [
@@ -88,12 +68,14 @@ export default function Portfolio() {
       {/* ส่วน Hero */}
       <section
         id="home"
-        className={`flex flex-col items-center justify-center min-h-screen text-center px-4 ${
+        className={`flex flex-col items-center justify-center min-h-screen text-center px-4 font-thai leading-thai-normal ${
           darkMode ? "text-white" : "text-gray-800"
         }`}
       >
         <motion.h1
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 overflow-visible leading-thai-tight"
+          // leading-thai-tight = กำหนดระยะห่างระหว่างบรรทัดที่เหมาะกับภาษาไทย
+          // overflow-visible = ทำให้วรรณยุกต์ไม่ถูกตัดเมื่อล้นกรอบ
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -101,6 +83,7 @@ export default function Portfolio() {
           <span
             className={`
   inline-block
+  py-1
   ${
     darkMode
       ? "bg-gradient-to-br from-purple-400 via-pink-400 to-red-400"
@@ -112,6 +95,7 @@ export default function Portfolio() {
   transition-all 
   duration-300
   hover:scale-105
+  thai-text
   ${
     darkMode
       ? "drop-shadow-[0_2px_2px_rgba(236,72,153,0.3)]"
@@ -125,6 +109,9 @@ export default function Portfolio() {
             className={`
     relative 
     inline-block
+    overflow-visible
+    py-1
+    thai-text
     ${
       darkMode
         ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
@@ -139,6 +126,8 @@ export default function Portfolio() {
             // bg-gradient-to-r = สร้างไล่สีจากซ้ายไปขวา
             // bg-clip-text = ให้สีไล่เฉพาะตัวอักษร
             // text-transparent = ทำให้ตัวอักษรโปร่งใสเพื่อให้เห็น gradient
+            // overflow-visible = ทำให้ตัวอักษรไม่ถูกตัดเมื่อขนาดใหญ่เกินกรอบ
+            // py-1 = เพิ่มพื้นที่ด้านบนและล่างเพื่อรองรับวรรณยุกต์และสระ
           >
             <TypeAnimation
               key={`${t.language}-${t.fullname}`}
@@ -150,6 +139,12 @@ export default function Portfolio() {
                 textShadow: darkMode
                   ? "0 0 20px rgba(129, 140, 248, 0.5)"
                   : "0 0 20px rgba(79, 70, 229, 0.3)",
+                whiteSpace: "nowrap", // ทำให้ข้อความไม่ขึ้นบรรทัดใหม่
+                overflow: "visible", // ทำให้ข้อความไม่ถูกตัดเมื่อเกินกรอบ
+                lineHeight: "1.6", // เพิ่มระยะห่างของบรรทัดให้วรรณยุกต์แสดงเต็มที่
+                paddingTop: "0.25em", // เพิ่มพื้นที่ด้านบนเพื่อรองรับวรรณยุกต์
+                paddingBottom: "0.25em", // เพิ่มพื้นที่ด้านล่างเพื่อรองรับสระล่าง
+                height: "auto", // ปรับความสูงให้อัตโนมัติตามเนื้อหา
               }}
               repeat={Infinity}
             />
@@ -175,10 +170,13 @@ export default function Portfolio() {
           </span>
         </motion.h1>
 
+        {/* ข้อความอธิบายบทบาท */}
         <motion.p
-          className={`text-lg sm:text-xl md:text-2xl max-w-md sm:max-w-xl mb-8 ${
+          className={`text-lg sm:text-xl md:text-2xl max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mb-8 leading-relaxed py-1 thai-text ${
             darkMode ? "text-gray-300" : "text-gray-600"
           }`}
+          // leading-relaxed = ระยะห่างระหว่างบรรทัดที่เหมาะสม
+          // py-1 = เพิ่มพื้นที่ด้านบนและล่างเพื่อแสดงวรรณยุกต์และสระได้เต็มที่
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -195,7 +193,7 @@ export default function Portfolio() {
         >
           <motion.a
             href="#projects"
-            className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded-full text-white font-semibold transition-all shadow-lg hover:shadow-xl text-base sm:text-lg"
+            className="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded-full text-white font-semibold transition-all shadow-lg hover:shadow-xl text-base sm:text-lg thai-text"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -204,7 +202,7 @@ export default function Portfolio() {
 
           <motion.a
             href="#contact"
-            className={`px-8 py-3 rounded-full font-semibold border-2 text-base sm:text-lg
+            className={`px-8 py-3 rounded-full font-semibold border-2 text-base sm:text-lg thai-text
       ${
         darkMode
           ? "border-gray-300 text-gray-300 hover:bg-gray-300 hover:text-gray-900"
@@ -219,236 +217,13 @@ export default function Portfolio() {
       </section>
 
       {/* ส่วน About Me */}
-      <section
-        id="about"
-        className={`py-12 sm:py-16 md:py-20 ${
-          darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800"
-        }`}
-      >
-        {/* Container หลัก */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          {/* ส่วนหัวข้อ About Me */}
-          <motion.div
-            className="text-center mb-12 sm:mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <h2
-              className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
-                darkMode ? "text-indigo-400" : "text-indigo-600"
-              }`}
-            >
-              {t.about.title}
-            </h2>
-            {/* เส้นใต้หัวข้อ */}
-            <div
-              className={`h-1 w-20 sm:w-24 mx-auto ${
-                darkMode ? "bg-indigo-500" : "bg-indigo-400"
-              } rounded-full`}
-            ></div>
-          </motion.div>
+      <AboutMe darkMode={darkMode} t={t} profileImage={wakim} />
 
-          {/* ส่วนเนื้อหา - จัดวางแบบ Flex */}
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
-            {/* ส่วนรูปโปรไฟล์ - ตรงกลางเสมอ */}
-            <motion.div
-              className="w-full lg:w-1/2 flex justify-center"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div
-                className={`relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 ${
-                  darkMode ? "border-indigo-500" : "border-indigo-400"
-                } shadow-xl`}
-              >
-                <img
-                  src={wakim}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-
-            {/* ส่วนข้อความ */}
-            <motion.div
-              className="w-full lg:w-1/2 text-center lg:text-left"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <div className="space-y-6 sm:space-y-8">
-                {/* ข้อความเกี่ยวกับตัวฉัน */}
-                <p
-                  className={`text-base sm:text-lg md:text-xl leading-relaxed ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
-                >
-                  {t.about.content}
-                </p>
-
-                <div
-                  className={`p-4 sm:p-6 rounded-xl ${
-                    darkMode ? "bg-gray-700" : "bg-gray-100"
-                  } shadow-md w-full text-left`}
-                >
-                  <div className="space-y-4 sm:space-y-6">
-                    {/* วนซ้ำผ่านรายการข้อมูล*/}
-                    {[
-                      {
-                        icon: (
-                          <FaGraduationCap className="text-xl sm:text-2xl" />
-                        ),
-                        title: t.about.education,
-                        description: t.about.major,
-                      },
-                      {
-                        icon: <FaUniversity className="text-xl sm:text-2xl" />,
-                        title: t.about.university_name,
-                        description: t.about.university,
-                      },
-                      // เพิ่มรายการเพิ่มเติม
-                    ].map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full"
-                      >
-                        <div
-                          className={`w-10 h-10 flex items-center justify-center rounded-lg ${
-                            darkMode
-                              ? "bg-indigo-800 text-indigo-200"
-                              : "bg-indigo-100 text-indigo-600"
-                          }`}
-                        >
-                          {item.icon}
-                        </div>
-                        <div className="w-full">
-                          <h3
-                            className={`text-lg sm:text-xl font-semibold ${
-                              darkMode ? "text-indigo-300" : "text-indigo-600"
-                            }`}
-                          >
-                            {item.title}
-                          </h3>
-                          <p
-                            className={`mt-1 text-sm sm:text-base ${
-                              darkMode ? "text-gray-400" : "text-gray-600"
-                            }`}
-                          >
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* ปุ่มดาวน์โหลด Resume */}
-                <div className="flex justify-center lg:justify-start">
-                  <motion.button
-                    onClick={handleDownloadResume}
-                    className={`flex items-center gap-2 sm:gap-3 px-5 sm:px-6 py-2 sm:py-3 rounded-full text-base sm:text-lg font-medium ${
-                      darkMode
-                        ? "bg-indigo-600 hover:bg-indigo-700"
-                        : "bg-indigo-500 hover:bg-indigo-600"
-                    } text-white transition-colors cursor-pointer hover:cursor-pointer`}
-                    whileHover={{
-                      scale: 1.05,
-                      transition: { duration: 0.2 },
-                    }}
-                    whileTap={{
-                      scale: 0.95,
-                      transition: { duration: 0.1 },
-                    }}
-                  >
-                    <FaDownload className="text-lg sm:text-xl" />
-                    <span>{t.downloadResume}</span>
-                  </motion.button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ส่วน Skills */}
-      <div
-        id="skills"
-        className={`py-4 ${
-          darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-        }`}
-      >
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">
-          {t.skills}
-        </h2>
-        <div
-          className={`h-1 w-20 mx-auto ${
-            darkMode ? "bg-indigo-500" : "bg-indigo-400"
-          } rounded-full`}
-        ></div>
-        <Marquee
-          speed={100}
-          pauseOnHover={true}
-          gradient={false}
-          className={`py-4 ${
-            darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-          }`}
-        >
-          <div className="flex flex-wrap justify-center gap-10 sm:gap-20 px-4 py-6 sm:py-8">
-            {[
-              { icon: FaHtml5, name: "HTML", color: "text-orange-500" },
-              { icon: FaCss3Alt, name: "CSS", color: "text-blue-500" },
-              { icon: FaJs, name: "JavaScript", color: "text-yellow-400" },
-              { icon: FaJs, name: "TypeScript", color: "text-blue-500" },
-              { icon: FaReact, name: "React", color: "text-cyan-400" },
-              {
-                icon: RiTailwindCssFill,
-                name: "Tailwind",
-                color: "text-blue-400",
-              },
-              { icon: FaVuejs, name: "Vue", color: "text-green-400" },
-              {
-                icon: RiNextjsFill,
-                name: "Next",
-                color: darkMode ? "text-gray-400" : "text-gray-600",
-              },
-              {
-                icon: SiNuxtdotjs,
-                name: "Nuxt",
-                color: darkMode ? "text-gray-400" : "text-gray-600",
-              },
-            ].map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <div
-                  key={index}
-                  className="flex flex-col items-center gap-2 sm:gap-3 group"
-                >
-                  <Icon
-                    className={`text-4xl sm:text-5xl md:text-6xl ${skill.color} group-hover:scale-110 transition-transform`}
-                  />
-                  <p
-                    className={`text-lg sm:text-xl font-medium ${
-                      darkMode ? "text-white" : "text-gray-800"
-                    }`}
-                  >
-                    {skill.name}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </Marquee>
-      </div>
+      {/* ส่วน Skills  */}
+      <Skills darkMode={darkMode}lang={lang}/>
 
       {/* ส่วน Services */}
-      <Services darkMode={darkMode} lang={lang} t={t} />
-
-      {/* ส่วน Education */}
+      <Services darkMode={darkMode} lang={lang}/>
 
       {/* ส่วน Projects */}
       <section
