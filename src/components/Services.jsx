@@ -1,50 +1,70 @@
-{/* ส่วน Services Component - แสดงบริการและความเชี่ยวชาญ */}
+{
+  /* ส่วน Services Component - แสดงบริการและความเชี่ยวชาญ */
+}
 import { motion } from "framer-motion";
-import { FaCode, FaDatabase, FaTools, FaServer, FaMobileAlt, FaPaintBrush } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import {
+  FaCode,
+  FaDatabase,
+  FaTools,
+  FaServer,
+  FaMobileAlt,
+  FaPaintBrush,
+} from "react-icons/fa";
 
 // แยกข้อความภาษาไทย
 import textTH from "../lang/th";
 import textEN from "../lang/en";
 
-
 const Services = ({ darkMode, lang }) => {
+  // แยกข้อความตามภาษา
+  const t = lang === "th" ? textTH : textEN;
 
-   // แยกข้อความตามภาษา
-   const t = lang === "th" ? textTH : textEN;
-
-    // รายการบริการและความเชี่ยวชาญ
+  // รายการบริการและความเชี่ยวชาญ
   const servicesList = [
     {
       icon: <FaCode className="text-2xl sm:text-3xl" />,
-      title: t.services.webdev.title || "ซอฟต์แวร์และการพัฒนาเว็บไซต์",
-      description: t.services.webdev.desc || "พัฒนาเว็บไซต์ด้วย React, Next.js, Vue.js และ Nuxt.js พร้อมการใช้ Tailwind CSS และ TypeScript สำหรับแอปพลิเคชันที่มีประสิทธิภาพและรองรับทุกอุปกรณ์",
-      tools: ["React", "Next.js", "Vue.js", "Nuxt.js", "HTML", "CSS", "JavaScript", "TypeScript", "Tailwind CSS"]
+      title: t.services.webdev.title,
+      description: t.services.webdev.desc,
+      tools: [
+        "React",
+        "Next.js",
+        "Vue.js",
+        "Nuxt.js",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript",
+        "Tailwind CSS",
+      ],
     },
     {
       icon: <FaDatabase className="text-2xl sm:text-3xl" />,
-      title: t.services.database.title || "ฐานข้อมูล",
-      description: t.services.database.desc || "ออกแบบและจัดการฐานข้อมูลทั้งแบบ SQL และ NoSQL เพื่อจัดเก็บข้อมูลอย่างมีประสิทธิภาพและปลอดภัย",
-      tools: ["MySQL", "PostgreSQL", "MongoDB"]
+      title: t.services.database.title,
+      description:
+        t.services.database.desc ||
+        "ออกแบบและจัดการฐานข้อมูลทั้งแบบ SQL และ NoSQL เพื่อจัดเก็บข้อมูลอย่างมีประสิทธิภาพและปลอดภัย",
+      tools: ["MySQL", "PostgreSQL", "MongoDB"],
     },
     {
       icon: <FaServer className="text-2xl sm:text-3xl" />,
-      title: t.services.backend.title || "การพัฒนา Backend",
-      description: t.services.backend.desc || "พัฒนา API และระบบ Backend ด้วย Node.js, Express และ Python เพื่อรองรับการทำงานของแอปพลิเคชัน",
-      tools: ["Node.js", "Express", "Rest API"]
+      title: t.services.backend.title,
+      description:
+        t.services.backend.desc ||
+        "พัฒนา API และระบบ Backend ด้วย Node.js, Express และ Python เพื่อรองรับการทำงานของแอปพลิเคชัน",
+      tools: ["Node.js", "Express", "Rest API"],
     },
     {
       icon: <FaPaintBrush className="text-2xl sm:text-3xl" />,
-      title: t.services.design.title || "การออกแบบ UI/UX",
-      description: t.services.design.desc || "ออกแบบส่วนติดต่อผู้ใช้ที่สวยงามและใช้งานง่าย ด้วยหลักการ UX/UI ที่ทันสมัย",
-      tools: ["Figma", "Canva", "Photoshop", "Responsive Design"]
+      title: t.services.design.title,
+      description: t.services.design.desc,
+      tools: ["Figma", "Canva", "Photoshop", "Responsive Design"],
     },
     {
       icon: <FaTools className="text-2xl sm:text-3xl" />,
-      title: t.services.devtools.title || "เครื่องมือและเทคโนโลยีการพัฒนา",
-      description: t.services.devtools.desc || "ชำนาญในการใช้เครื่องมือต่างๆ เพื่อเพิ่มประสิทธิภาพในกระบวนการพัฒนาซอฟต์แวร์",
-      tools: ["Git", "GitHub", "Docker","Postman", "ChatGPT", "Vercel", ]
-    }
+      title: t.services.devtools.title,
+      description: t.services.devtools.desc,
+      tools: ["Git", "GitHub", "Docker", "Postman", "ChatGPT", "Vercel"],
+    },
   ];
 
   return (
@@ -63,13 +83,13 @@ const Services = ({ darkMode, lang }) => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-            <h2
+          <h2
             className={`text-2xl sm:text-3xl my-3 font-bold  ${
-                darkMode ? "text-white" : "text-gray-800"
+              darkMode ? "text-white" : "text-gray-800"
             }`}
-            >
+          >
             {t.nameservices}
-            </h2>
+          </h2>
           {/* เส้นใต้หัวข้อ */}
           <div
             className={`h-1 w-20 sm:w-24 mx-auto ${
@@ -80,8 +100,7 @@ const Services = ({ darkMode, lang }) => {
             className={`mt-4 max-w-2xl mx-auto text-lg ${
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
-          >
-          </p>
+          ></p>
         </motion.div>
 
         {/* แสดงการ์ดบริการต่างๆ */}
@@ -90,8 +109,8 @@ const Services = ({ darkMode, lang }) => {
             <motion.div
               key={index}
               className={`rounded-xl overflow-hidden shadow-lg ${
-                darkMode 
-                  ? "bg-gray-800 hover:bg-gray-700 hover:shadow-indigo-500/30" 
+                darkMode
+                  ? "bg-gray-800 hover:bg-gray-700 hover:shadow-indigo-500/30"
                   : "bg-white hover:shadow-indigo-300/30"
               } transition-all duration-300`}
               initial={{ opacity: 0, y: 20 }}
@@ -108,7 +127,9 @@ const Services = ({ darkMode, lang }) => {
               >
                 <div
                   className={`p-3 rounded-lg mr-4 ${
-                    darkMode ? "bg-indigo-600 text-indigo-200" : "bg-indigo-100 text-indigo-600"
+                    darkMode
+                      ? "bg-indigo-600 text-indigo-200"
+                      : "bg-indigo-100 text-indigo-600"
                   }`}
                 >
                   {service.icon}
@@ -139,7 +160,7 @@ const Services = ({ darkMode, lang }) => {
                       darkMode ? "text-gray-400" : "text-gray-500"
                     }`}
                   >
-                    {t.services?.tools || "เครื่องมือและเทคโนโลยี"}:
+                    {t.services.tools.title}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {service.tools.map((tool, idx) => (
