@@ -6,12 +6,6 @@ import {
   FaReact,
   FaVuejs,
   FaNodeJs,
-  FaPhp,
-  FaDatabase,
-  FaGitAlt,
-  FaDocker,
-  FaAws,
-  FaPython,
 } from "react-icons/fa";
 import {
   SiTypescript,
@@ -140,7 +134,7 @@ export default function Skills({ darkMode, lang }) {
 
               <div className="py-4">
                 <Marquee
-                  speed={100}
+                  speed={80}
                   gradient={false}
                   pauseOnHover={true}
                   direction={
@@ -148,7 +142,6 @@ export default function Skills({ darkMode, lang }) {
                       ? "right"
                       : "left"
                   }
-                  className="flex items-center justify-center"
                 >
                   <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 px-4">
                     {category.skills.map((skill, index) => {
