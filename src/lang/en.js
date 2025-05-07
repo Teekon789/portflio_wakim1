@@ -30,7 +30,7 @@ const textEN = {
     desc: "A web application for requesting permissions and generating PDF documents built with Next.js. The document generation uses react-pdf...",
     title2: "Blog App",
     desc2:
-      "A blog web application for posting articles and comments. Built with Next.js and uses MongoDB for data storage. It uses next-auth for managing user login and registration, and has an admin dashboard for managing posts and comments. It has an admin panel for managing posts and users.",
+      "A blog web application built with Next.js, using MongoDB as the database and NextAuth for user authentication. The system allows users to register, log in, create articles, and post comments. An admin dashboard is included for managing posts, comments, and user accounts.",
   },
 
   downloadResume: "Download Resume",

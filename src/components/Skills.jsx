@@ -15,6 +15,7 @@ import {
   SiMysql,
   SiTailwindcss,
   SiNextdotjs,
+  SiPrisma,
 } from "react-icons/si";
 import Marquee from "react-fast-marquee";
 
@@ -35,7 +36,7 @@ export default function Skills({ darkMode, lang }) {
         { icon: FaCss3Alt, name: "CSS", color: "text-blue-500" },
         { icon: FaJs, name: "JavaScript", color: "text-yellow-400" },
         { icon: SiTypescript, name: "TypeScript", color: "text-blue-500" },
-        { icon: SiTailwindcss, name: "Tailwind", color: "text-blue-400" },
+        { icon: SiTailwindcss, name: "Tailwindcss", color: "text-blue-400" },
       ],
     },
     {
@@ -45,6 +46,7 @@ export default function Skills({ darkMode, lang }) {
         { icon: SiMongodb, name: "MongoDB", color: "text-green-500" },
         { icon: SiPostgresql, name: "PostgreSQL", color: "text-blue-700" },
         { icon: SiMysql, name: "MySQL", color: "text-blue-500" },
+        { icon: SiPrisma, name: "Prisma", color: "text-purple-500" },
       ],
     },
     {
