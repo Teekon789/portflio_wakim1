@@ -28,6 +28,9 @@ const textEN = {
   projects_name: {
     title: "Permission and PDF Document Request System",
     desc: "A web application for requesting permissions and generating PDF documents built with Next.js. The document generation uses react-pdf...",
+    title2: "Blog App",
+    desc2:
+      "A blog web application for posting articles and comments. Built with Next.js and uses MongoDB for data storage. It uses next-auth for managing user login and registration, and has an admin dashboard for managing posts and comments. It has an admin panel for managing posts and users.",
   },
 
   downloadResume: "Download Resume",

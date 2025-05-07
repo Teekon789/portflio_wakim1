@@ -1,18 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaEnvelope,
-  FaDownload,
-} from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaDownload } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 import mn_2 from "./assets/mn_2.png";
 import wakim from "./assets/wakim.jpg";
-import Navbar from "./components/navbar";
-import Scrollup from "./components/scrollup";
+import Navbar from "./components/Navbar";
+import Scrollup from "./components/Scrollup";
 import Services from "./components/Services";
 import Skills from "./components/Skills";
-import AboutMe from "./components/AboutMe"; 
+import AboutMe from "./components/AboutMe";
+import Contact from "./components/Contact";
 
 // แยกข้อความภาษาไทย
 import textTH from "./lang/th";
@@ -32,19 +29,12 @@ export default function Portfolio() {
       code: "https://github.com/Teekon789/my-nextjs-project",
       image: mn_2,
     },
-  ];
-
-  // รายการช่องทางติดต่อ
-  const contactLinks = [
     {
-      name: "GitHub",
-      url: "https://github.com/Teekon789",
-      icon: FaGithub,
-    },
-    {
-      name: "Email",
-      url: "https://mail.google.com/mail/?view=cm&fs=1&to=teeboy789456@gmail.com",
-      icon: FaEnvelope,
+      title: t.projects_name.title2,
+      desc: t.projects_name.desc2,
+      demo: "https://next-dashboard-futureskill.vercel.app/",
+      code: "https://github.com/Teekon789/next_futureskill",
+      image: "https://i.imgur.com/6k7mDkR.png",
     },
   ];
 
@@ -74,60 +64,53 @@ export default function Portfolio() {
       >
         <motion.h1
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 overflow-visible leading-thai-tight"
-          // leading-thai-tight = กำหนดระยะห่างระหว่างบรรทัดที่เหมาะกับภาษาไทย
-          // overflow-visible = ทำให้วรรณยุกต์ไม่ถูกตัดเมื่อล้นกรอบ
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span
             className={`
-  inline-block
-  py-1
-  ${
-    darkMode
-      ? "bg-gradient-to-br from-purple-400 via-pink-400 to-red-400"
-      : "bg-gradient-to-br from-purple-600 via-pink-600 to-red-600"
-  }
-  bg-clip-text 
-  text-transparent
-  font-bold
-  transition-all 
-  duration-300
-  hover:scale-105
-  thai-text
-  ${
-    darkMode
-      ? "drop-shadow-[0_2px_2px_rgba(236,72,153,0.3)]"
-      : "drop-shadow-[0_2px_2px_rgba(219,39,119,0.3)]"
-  }
-`}
+              inline-block
+              py-1
+              ${
+                darkMode
+                  ? "bg-gradient-to-br from-purple-400 via-pink-400 to-red-400"
+                  : "bg-gradient-to-br from-purple-600 via-pink-600 to-red-600"
+              }
+              bg-clip-text 
+              text-transparent
+              font-bold
+              transition-all 
+              duration-300
+              hover:scale-105
+              thai-text
+              ${
+                darkMode
+                  ? "drop-shadow-[0_2px_2px_rgba(236,72,153,0.3)]"
+                  : "drop-shadow-[0_2px_2px_rgba(219,39,119,0.3)]"
+              }
+            `}
           >
             {t.greeting}
           </span>{" "}
           <span
             className={`
-    relative 
-    inline-block
-    overflow-visible
-    py-1
-    thai-text
-    ${
-      darkMode
-        ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
-        : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
-    }
-    bg-clip-text 
-    text-transparent
-    transition-all 
-    duration-300
-    hover:scale-105
-  `}
-            // bg-gradient-to-r = สร้างไล่สีจากซ้ายไปขวา
-            // bg-clip-text = ให้สีไล่เฉพาะตัวอักษร
-            // text-transparent = ทำให้ตัวอักษรโปร่งใสเพื่อให้เห็น gradient
-            // overflow-visible = ทำให้ตัวอักษรไม่ถูกตัดเมื่อขนาดใหญ่เกินกรอบ
-            // py-1 = เพิ่มพื้นที่ด้านบนและล่างเพื่อรองรับวรรณยุกต์และสระ
+              relative 
+              inline-block
+              overflow-visible
+              py-1
+              thai-text
+              ${
+                darkMode
+                  ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
+                  : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+              }
+              bg-clip-text 
+              text-transparent
+              transition-all 
+              duration-300
+              hover:scale-105
+            `}
           >
             <TypeAnimation
               key={`${t.language}-${t.fullname}`}
@@ -139,44 +122,39 @@ export default function Portfolio() {
                 textShadow: darkMode
                   ? "0 0 20px rgba(129, 140, 248, 0.5)"
                   : "0 0 20px rgba(79, 70, 229, 0.3)",
-                whiteSpace: "nowrap", // ทำให้ข้อความไม่ขึ้นบรรทัดใหม่
-                overflow: "visible", // ทำให้ข้อความไม่ถูกตัดเมื่อเกินกรอบ
-                lineHeight: "1.6", // เพิ่มระยะห่างของบรรทัดให้วรรณยุกต์แสดงเต็มที่
-                paddingTop: "0.25em", // เพิ่มพื้นที่ด้านบนเพื่อรองรับวรรณยุกต์
-                paddingBottom: "0.25em", // เพิ่มพื้นที่ด้านล่างเพื่อรองรับสระล่าง
-                height: "auto", // ปรับความสูงให้อัตโนมัติตามเนื้อหา
+                whiteSpace: "nowrap",
+                overflow: "visible",
+                lineHeight: "1.6",
+                paddingTop: "0.25em",
+                paddingBottom: "0.25em",
+                height: "auto",
               }}
               repeat={Infinity}
             />
-
-            {/* เส้น underline with animation */}
             <span
               className={`
-    absolute 
-    bottom-0 
-    left-0 
-    w-0 
-    h-0.5 
-    transition-all 
-    duration-300 
-    group-hover:w-full
-    ${
-      darkMode
-        ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
-        : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
-    }
-  `}
+                absolute 
+                bottom-0 
+                left-0 
+                w-0 
+                h-0.5 
+                transition-all 
+                duration-300 
+                group-hover:w-full
+                ${
+                  darkMode
+                    ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
+                    : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+                }
+              `}
             ></span>
           </span>
         </motion.h1>
 
-        {/* ข้อความอธิบายบทบาท */}
         <motion.p
           className={`text-lg sm:text-xl md:text-2xl max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mb-8 leading-relaxed py-1 thai-text ${
             darkMode ? "text-gray-300" : "text-gray-600"
           }`}
-          // leading-relaxed = ระยะห่างระหว่างบรรทัดที่เหมาะสม
-          // py-1 = เพิ่มพื้นที่ด้านบนและล่างเพื่อแสดงวรรณยุกต์และสระได้เต็มที่
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -184,7 +162,6 @@ export default function Portfolio() {
           {t.role}
         </motion.p>
 
-        {/* ปุ่มกดทั้งหมด (Button Container) */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 items-center"
           initial={{ opacity: 0, y: 20 }}
@@ -203,11 +180,11 @@ export default function Portfolio() {
           <motion.a
             href="#contact"
             className={`px-8 py-3 rounded-full font-semibold border-2 text-base sm:text-lg thai-text
-      ${
-        darkMode
-          ? "border-gray-300 text-gray-300 hover:bg-gray-300 hover:text-gray-900"
-          : "border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white"
-      } transition-all shadow-lg hover:shadow-xl`}
+              ${
+                darkMode
+                  ? "border-gray-300 text-gray-300 hover:bg-gray-300 hover:text-gray-900"
+                  : "border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white"
+              } transition-all shadow-lg hover:shadow-xl`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -219,17 +196,11 @@ export default function Portfolio() {
       {/* ส่วน About Me */}
       <AboutMe darkMode={darkMode} t={t} profileImage={wakim} />
 
-      {/* ส่วน Skills  */}
-      <Skills darkMode={darkMode}lang={lang}/>
-
-      {/* ส่วน Services */}
-      <Services darkMode={darkMode} lang={lang}/>
-
       {/* ส่วน Projects */}
       <section
         id="projects"
         className={`px-4 sm:px-6 py-12 sm:py-16 md:py-20 ${
-          darkMode ? "bg-gray-800" : "bg-gray-200"
+          darkMode ? "bg-gray-700 " : "bg-gray-300"
         }`}
       >
         <h2
@@ -305,72 +276,14 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* ส่วน Skills  */}
+      <Skills darkMode={darkMode} lang={lang} />
+
+      {/* ส่วน Services */}
+      <Services darkMode={darkMode} lang={lang} />
+
       {/* ส่วน Contact */}
-      <section
-        id="contact"
-        className={`container mx-auto px-4 py-16 md:py-24 ${
-          darkMode ? "text-gray-100" : "text-gray-800"
-        }`}
-      >
-        <div className="max-w-4xl mx-auto">
-          {/* หัวข้อส่วนติดต่อ */}
-          <motion.h2
-            className="text-2xl md:text-3xl font-bold text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            {t.contactMe}
-            <div
-              className={`h-1 w-24 mx-auto mt-4 rounded-full ${
-                darkMode ? "bg-indigo-500" : "bg-indigo-400"
-              }`}
-            ></div>
-          </motion.h2>
-
-          {/* ไอคอนติดต่อ - แสดงชื่อเมื่อ hover */}
-          <div className="flex justify-center flex-wrap gap-8">
-            {contactLinks.map((contact, index) => (
-              <motion.div
-                key={index}
-                className="relative group"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <a
-                  href={contact.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <contact.icon
-                    className={`w-10 h-10 transition-all duration-300 hover:scale-110 ${
-                      darkMode
-                        ? "text-gray-300 hover:text-gray-200"
-                        : "text-gray-700 hover:text-gray-800"
-                    }`}
-                  />
-                </a>
-
-                {/* Tooltip ชื่อ */}
-                <div
-                  className={`
-            absolute -bottom-8 left-1/2 transform -translate-x-1/2
-            opacity-0 group-hover:opacity-100 transition-opacity duration-200
-            text-sm whitespace-nowrap
-            ${darkMode ? "text-gray-300" : "text-gray-600"}
-          `}
-                >
-                  {contact.name}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Contact darkMode={darkMode} t={t} />
 
       {/* ปุ่มเลื่อนขึ้นด้านบน */}
       <Scrollup darkMode={darkMode} lang={lang} />
