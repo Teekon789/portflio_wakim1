@@ -35,6 +35,7 @@ export default function Portfolio() {
       demo: "https://next-dashboard-futureskill.vercel.app/",
       code: "https://github.com/Teekon789/next_futureskill",
       image: "https://i.imgur.com/6k7mDkR.png",
+      
     },
   ];
 
