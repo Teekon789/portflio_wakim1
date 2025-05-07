@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 
+import { FaDownload } from "react-icons/fa";
+import resumeFile from "../assets/Resume.pdf";
+
 const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
   // สร้าง state สำหรับเปิด/ปิด mobile menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,13 +51,22 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
     };
   }, []);
 
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = resumeFile;
+    link.download = "Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // รายการเมนูสำหรับการนำทาง
   const navItems = [
     { name: t.nav.home, href: "#home" },
     { name: t.nav.about, href: "#about" },
     { name: t.nav.projects, href: "#projects" },
     { name: t.nav.skills, href: "#skills" },
-    { name: t.nav.services, href: "#services" }, 
+    { name: t.nav.services, href: "#services" },
     { name: t.nav.contact, href: "#contact" },
   ];
 
@@ -223,6 +235,7 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
           transition={{ duration: 0.3 }}
         >
           <div className="px-4 pt-2 pb-4 space-y-1">
+            {/* เมนูนำทาง */}
             {navItems.map((item, index) => (
               <a
                 key={index}
@@ -237,6 +250,21 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
                 {item.name}
               </a>
             ))}
+
+            {/* ปุ่มดาวน์โหลดเรซูเม่ */}
+            <div className="px-4 py-3">
+              <button
+                onClick={handleDownloadResume}
+                className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  darkMode
+                    ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/30"
+                    : "bg-indigo-500 hover:bg-indigo-600 text-white shadow-lg shadow-indigo-500/20"
+                }`}
+              >
+                <FaDownload className="text-sm" />
+                <span>{t.downloadResume}</span>
+              </button>
+            </div>
           </div>
         </motion.div>
       )}
