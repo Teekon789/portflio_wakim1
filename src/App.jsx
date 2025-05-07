@@ -200,7 +200,9 @@ export default function Portfolio() {
       <section
         id="projects"
         className={`px-4 sm:px-6 py-12 sm:py-16 md:py-20 ${
-          darkMode ? "bg-gray-700 " : "bg-gray-300"
+          darkMode
+          ? "bg-gradient-to-b from-gray-700 to-gray-800"
+          : "bg-gradient-to-b from-gray-100 to-gray-200"
         }`}
       >
         <h2
