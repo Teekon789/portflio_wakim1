@@ -6,7 +6,7 @@ import mn_2 from "./assets/mn_2.png";
 import wakim from "./assets/wakim.jpg";
 import Navbar from "./components/navbar";
 import Scrollup from "./components/scrollup";
-import Services from "./components/services";
+import Services from "./components/Services";
 import Skills from "./components/Skills";
 import AboutMe from "./components/AboutMe";
 import Contact from "./components/Contact";

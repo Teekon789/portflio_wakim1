@@ -7,7 +7,6 @@ import {
   FaDatabase,
   FaTools,
   FaServer,
-  FaMobileAlt,
   FaPaintBrush,
 } from "react-icons/fa";
 
