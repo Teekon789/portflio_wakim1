@@ -4,9 +4,9 @@ import { FaGithub, FaEnvelope, FaDownload } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 import mn_2 from "./assets/mn_2.png";
 import wakim from "./assets/wakim.jpg";
-import Navbar from "./components/Navbar";
-import Scrollup from "./components/Scrollup";
-import Services from "./components/Services";
+import Navbar from "./components/navbar";
+import Scrollup from "./components/scrollup";
+import Services from "./components/services";
 import Skills from "./components/Skills";
 import AboutMe from "./components/AboutMe";
 import Contact from "./components/Contact";
@@ -35,7 +35,6 @@ export default function Portfolio() {
       demo: "https://next-dashboard-futureskill.vercel.app/",
       code: "https://github.com/Teekon789/next_futureskill",
       image: "https://i.imgur.com/6k7mDkR.png",
-      
     },
   ];
 
