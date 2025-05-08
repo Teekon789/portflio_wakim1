@@ -15,8 +15,27 @@ function Scrollup({ darkMode, lang }) {
   const [lastScrollY, setLastScrollY] = useState(0);
   // สถานะสำหรับตรวจสอบการ hover
   const [isHovered, setIsHovered] = useState(false);
+  // ตรวจสอบว่าเป็นอุปกรณ์มือถือหรือไม่
+  const [isMobile, setIsMobile] = useState(false);
   // แยกข้อความตามภาษา
   const t = lang === "th" ? textTH : textEN;
+
+  useEffect(() => {
+    // ตรวจสอบว่าเป็นอุปกรณ์มือถือหรือไม่
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+    };
+    
+    // ตรวจสอบครั้งแรก
+    checkMobile();
+    
+    // ตรวจสอบเมื่อขนาดหน้าจอเปลี่ยนแปลง
+    window.addEventListener("resize", checkMobile);
+    
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     // ฟังก์ชันตรวจสอบการเลื่อนหน้า
@@ -46,9 +65,32 @@ function Scrollup({ darkMode, lang }) {
     };
   }, [lastScrollY]);
 
+  // สำหรับอุปกรณ์มือถือ: ล้างสถานะ hover หลังจากการแตะ
+  useEffect(() => {
+    if (isMobile && isHovered) {
+      // ตั้งเวลาเพื่อซ่อน tooltip หลังจากแตะ
+      const timer = setTimeout(() => {
+        setIsHovered(false);
+      }, 2000); // ซ่อนหลังจาก 2 วินาที
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile, isHovered]);
+
   // ฟังก์ชันเลื่อนขึ้นด้านบน
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    // สำหรับมือถือ แสดง tooltip ชั่วคราวเมื่อกด
+    if (isMobile) {
+      setIsHovered(true);
+    }
+  };
+
+  // handler สำหรับจัดการ touch events บนมือถือ
+  const handleTouchStart = () => {
+    if (isMobile) {
+      setIsHovered(!isHovered); // สลับการแสดง tooltip
+    }
   };
 
   return (
@@ -70,8 +112,9 @@ function Scrollup({ darkMode, lang }) {
             damping: 20,
           }}
           aria-label="Scroll to top"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={() => !isMobile && setIsHovered(true)}
+          onMouseLeave={() => !isMobile && setIsHovered(false)}
+          onTouchStart={handleTouchStart}
         >
           {/* ปุ่มหลัก */}
           <motion.div
@@ -130,7 +173,7 @@ function Scrollup({ darkMode, lang }) {
             />
           </motion.div>
 
-          {/* ข้อความที่แสดงเมื่อ hover */}
+          {/* ข้อความที่แสดงเมื่อ hover หรือแตะบนมือถือ */}
           <AnimatePresence>
             {isHovered && (
               <motion.div

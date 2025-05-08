@@ -1,100 +1,114 @@
-import { motion } from "framer-motion";
-import { FaGithub, FaEnvelope } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaGithub, FaEnvelope, FaLinkedin } from "react-icons/fa";
 import { SiLine } from "react-icons/si";
 
 const Contact = ({ darkMode, t }) => {
+  // ระบุให้ติดตามว่าผู้ใช้ใช้โทรศัพท์มือถือหรือไม่
+  const [isMobile, setIsMobile] = useState(false);
+
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+      setIsMobile(mobileRegex.test(userAgent));
+    };
+    // ตรวจสอบว่าเป็นมือถือหรือไม่เมื่อโหลดคอมโพเนนต์
+    checkMobile();
+   
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // ฟังก์ชันเพื่อสร้างลิงก์อีเมลที่แตกต่างกันสำหรับมือถือและเดสก์ท็อป
+  const getEmailLink = () => {
+    const email = "wakim.transaction@gmail.com";
+    const subject = "Contact from Web Portfolio_Wakim";
+    const body = "Hello Wakim...";
+    
+   
+    if (isMobile) {
+      return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+    
+    // สำหรับเดสก์ท็อป
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   const contactInfo = [
     {
-      icon: <FaEnvelope className="text-xl sm:text-2xl" />,
+      icon: <FaEnvelope className="w-5 h-5" />,
       title: "Email",
       value: "wakim.transaction@gmail.com",
-      link: "https://mail.google.com/mail/?view=cm&fs=1&to=wakim.transaction@gmail.com&su=Contact%20from%20Web%20Portfolio_Wakim&body=Hello%20Wakim...",
+      // ลิงค์ไดนามิกที่เปลี่ยนแปลงตามอุปกรณ์
+      getDynamicLink: getEmailLink
     },
     {
-      icon: <FaGithub className="text-xl sm:text-2xl" />,
+      icon: <FaGithub className="w-5 h-5" />,
       title: "GitHub",
       value: "Github.com/Teekon789",
-      link: "https://github.com/Teekon789",
+      link: "https://github.com/Teekon789"
     },
     {
-      icon: <SiLine className="text-xl sm:text-2xl" />,
+      icon: <SiLine className="w-5 h-5" />,
       title: "Line",
-      value: "Wakim Sutthi ( id: Teekon789 )",
-      link: "https://line.me/ti/p/3DTC34SsXy",
+      value: "Wakim Sutthi (id: Teekon789)",
+      link: "https://line.me/ti/p/3DTC34SsXy"
     },
+    {
+      icon: <FaLinkedin className="w-5 h-5" />,
+      title: "LinkedIn",
+      value: "Wakim_Sutti",
+      link: "https://www.linkedin.com/in/wakim-sutti-01a469364?fbclid=IwZXh0bgNhZW0CMTEAYnJpZBExcGY3U0wzUUZienRxelpPcgEept8_8_JqDT4j4VjRZ54799k8u8TebSTc70cUm3yYf1IvDXLEkniv9bEwKLo_aem_BW5-0F-qaMro76DW79nYUA"
+    }
   ];
 
   return (
     <section
       id="contact"
-      className={`py-12 sm:py-16 md:py-20 ${
+      className={`py-16 ${
         darkMode
           ? "bg-gradient-to-b from-gray-800 to-gray-900"
-          : "bg-gradient-to-b from-gray-100 to-gray-200"
+          : "bg-gradient-to-b from-gray-100 to-white"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 ${
-            darkMode ? "text-white" : "text-gray-800"
-          }`}
-        >
-          {t.contactMe}
-          <div
-            className={`h-1 w-16 sm:w-20 mx-auto mt-2 sm:mt-3 ${
-              darkMode ? "bg-indigo-500" : "bg-indigo-600"
-            } rounded-full`}
-          />
-        </motion.h2>
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-800"}`}>
+            {t?.contactMe || "Contact Me"}
+          </h2>
+          <div className={`h-1 w-20 mx-auto mt-3 rounded-full ${darkMode ? "bg-indigo-400" : "bg-indigo-500"}`} />
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-3xl mx-auto"
-        >
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-xl ${
-              darkMode
-                ? "bg-gray-800 shadow-purple-500/20"
-                : "bg-white shadow-indigo-200"
-            }`}
-          >
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {contactInfo.map((item, index) => (
-              <motion.a
+              <a
                 key={index}
-                href={item.link}
+                href={item.getDynamicLink ? item.getDynamicLink() : item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                className={`flex flex-col items-center p-4 sm:p-6 rounded-lg sm:rounded-xl transition-all ${
-                  darkMode
-                    ? "hover:bg-gray-700 text-gray-300"
-                    : "hover:bg-gray-50 text-gray-600"
+                className={`flex items-center p-6 rounded-lg transition-all transform hover:scale-105 ${
+                  darkMode 
+                    ? "bg-gray-800 hover:bg-gray-700 shadow-lg text-gray-200" 
+                    : "bg-white hover:bg-gray-50 shadow-lg text-gray-700"
                 }`}
               >
-                <div
-                  className={`p-3 sm:p-4 rounded-full mb-3 sm:mb-4 ${
-                    darkMode
-                      ? "bg-gray-700 text-indigo-400"
-                      : "bg-indigo-100 text-indigo-600"
-                  }`}
-                >
+                <div className={`p-4 rounded-full mr-5 ${
+                  darkMode ? "bg-gray-700 text-indigo-300" : "bg-indigo-100 text-indigo-600"
+                }`}>
                   {item.icon}
                 </div>
-                <h3
-                  className={`text-base sm:text-lg font-semibold mb-1 sm:mb-2 ${
-                    darkMode ? "text-white" : "text-gray-800"
-                  }`}
-                >
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-center">{item.value}</p>
-              </motion.a>
+                <div>
+                  <h3 className={`text-lg font-semibold mb-1 ${darkMode ? "text-white" : "text-gray-800"}`}>
+                    {item.title}
+                  </h3>
+                  <p className="text-sm">{item.value}</p>
+                </div>
+              </a>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
