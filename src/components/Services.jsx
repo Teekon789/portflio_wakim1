@@ -8,6 +8,7 @@ import {
   FaTools,
   FaServer,
   FaPaintBrush,
+  FaMobile
 } from "react-icons/fa";
 
 // แยกข้อความภาษาไทย
@@ -64,6 +65,12 @@ const Services = ({ darkMode, lang }) => {
       description: t.services.devtools.desc,
       tools: ["Git", "GitHub", "Docker", "Postman", "ChatGPT", "Vercel"],
     },
+    {
+      icon: <FaMobile className="text-2xl sm:text-3xl" />,
+      title: t.services.mobile.title,
+      description: t.services.mobile.desc ,
+      tools: ["React Native", "Flutter", "iOS", "Android", "Expo", "Mobile UI/UX"]
+    }
   ];
 
   return (

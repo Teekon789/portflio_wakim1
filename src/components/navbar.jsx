@@ -95,15 +95,15 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
             }`}
           >
             <div className="relative inline-block overflow-visible transition-all duration-300 hover:transform hover:scale-105">
-              <span className="relative z-10">My</span>
+              <span className="relative z-10">Port</span>
               <span>
-                Port
+              folio
                 <span
                   className={`${
                     darkMode ? "text-indigo-300" : "text-indigo-500"
                   }`}
                 >
-                  folio
+                  Wakim
                 </span>
               </span>
               <span

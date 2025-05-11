@@ -17,7 +17,7 @@ const textEN = {
   about: {
     title: "About Me",
     content:
-      "Hello! I'm a web developer passionate about modern technologies...",
+      "I am a web developer passionate about modern technology, clean and readable code, and creating user-friendly websites. I am open to learning new things and developing myself through hands-on experience and collaboration with others.",
     education: "Education",
     major:
       "Bachelor of Information Technology (IT), Faculty of Information Technology (IT)",
@@ -65,7 +65,7 @@ const textEN = {
     },
     mobile: {
       title: "Mobile Application Development",
-      desc: "Develop cross-platform mobile applications using React Native for both iOS and Android.",
+      desc: "Develop Cross-platform mobile applications with React Native and Flutter to create a great user experience on both iOS and Android with React Native for both iOS and Android.",
     },
     design: {
       title: "UI/UX Design",
