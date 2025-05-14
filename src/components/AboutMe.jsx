@@ -45,8 +45,8 @@ export default function AboutMe({ darkMode, t, profileImage }) {
           viewport={{ once: true }}
         >
           <h2
-            className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
-              darkMode ? "text-indigo-400" : "text-indigo-600"
+            className={`text-2xl sm:text-3xl my-3 font-bold ${
+              darkMode ? "text-white" : "text-gray-800"
             }`}
           >
             {t.about.title}

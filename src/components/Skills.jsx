@@ -6,6 +6,11 @@ import {
   FaReact,
   FaVuejs,
   FaNodeJs,
+  FaGitAlt,
+  FaNpm,
+  FaPython,
+  FaJava,
+  FaDocker,
 } from "react-icons/fa";
 import {
   SiTypescript,
@@ -16,7 +21,17 @@ import {
   SiTailwindcss,
   SiNextdotjs,
   SiPrisma,
+  SiPhp,
+  SiGithub,
+  SiFigma,
+  SiPostman,
+  SiOpenai,
+  SiCanva,
+  SiGithubcopilot,
+  SiNuxtdotjs,
+  SiVite,
 } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 import Marquee from "react-fast-marquee";
 
 // แยกข้อความภาษาไทย
@@ -27,22 +42,37 @@ export default function Skills({ darkMode, lang }) {
   // แยกข้อความตามภาษา
   const t = lang === "th" ? textTH : textEN;
 
-  // กำหนดประเภททักษะเป็น 3 กลุ่ม: Frontend, Backend และ Framework
+  
   const skillCategories = [
     {
-      name: t.frontend || "Frontend", // ชื่อหมวดหมู่
+      name: "Languages", 
       skills: [
-        { icon: FaHtml5, name: "HTML", color: "text-orange-500" },
-        { icon: FaCss3Alt, name: "CSS", color: "text-blue-500" },
         { icon: FaJs, name: "JavaScript", color: "text-yellow-400" },
         { icon: SiTypescript, name: "TypeScript", color: "text-blue-500" },
-        { icon: SiTailwindcss, name: "Tailwindcss", color: "text-blue-400" },
+        { icon: FaPython, name: "Python", color: "text-blue-600" },
+        { icon: FaJava, name: "Java", color: "text-red-500" },
+        { icon: SiPhp, name: "PHP", color: "text-purple-500" },
       ],
     },
     {
-      name: t.backend || "Backend", // ชื่อหมวดหมู่
+      name: t.frontend || "Frontend", 
+      skills: [
+        { icon: FaHtml5, name: "HTML", color: "text-orange-500" },
+        { icon: FaCss3Alt, name: "CSS", color: "text-blue-500" },
+        { icon: SiTailwindcss, name: "Tailwindcss", color: "text-blue-400" },
+        { icon: FaReact, name: "React", color: "text-cyan-400" },
+        { icon: FaVuejs, name: "Vue", color: "text-green-500" },
+      ],
+    },
+    {
+      name: t.backend || "Backend", 
       skills: [
         { icon: FaNodeJs, name: "Node.js", color: "text-green-600" },
+        {
+          icon: SiExpress,
+          name: "Express",
+          color: darkMode ? "text-gray-300" : "text-gray-700",
+        },
         { icon: SiMongodb, name: "MongoDB", color: "text-green-500" },
         { icon: SiPostgresql, name: "PostgreSQL", color: "text-blue-700" },
         { icon: SiMysql, name: "MySQL", color: "text-blue-500" },
@@ -50,18 +80,39 @@ export default function Skills({ darkMode, lang }) {
       ],
     },
     {
-      name: t.framework || "Framework", // ชื่อหมวดหมู่เปลี่ยนเป็น Framework
+      name: t.framework || "Framework", 
       skills: [
-        { icon: FaReact, name: "React", color: "text-cyan-400" },
-        { icon: FaVuejs, name: "Vue", color: "text-green-500" },
         {
           icon: SiNextdotjs,
           name: "Next.js",
           color: darkMode ? "text-gray-300" : "text-gray-700",
         },
+        { icon: FaReact, name: "React Native", color: "text-cyan-500" },
+        { icon: SiNuxtdotjs, name: "Nuxt.js", color: "text-green-500" },
+         { icon: SiVite, name: "Vite", color: "text-purple-600" },
+      ],
+    },
+    {
+      name: "Development Tools", 
+      skills: [
+        { icon: VscVscode, name: "VS Code", color: "text-blue-500" },
+        { icon: SiOpenai, name: "ChatGPT",  color: darkMode ? "text-gray-300" : "text-gray-700", },
+        { icon: FaGitAlt, name: "Git", color: "text-orange-600" },
         {
-          icon: SiExpress,
-          name: "Express",
+          icon: SiGithub,
+          name: "GitHub",
+          color: darkMode ? "text-gray-300" : "text-gray-700",
+        },
+        { icon: FaDocker, name: "Docker", color: "text-blue-600" },
+        { icon: SiFigma, name: "Figma", color: "text-purple-400" },
+        { icon: SiPostman, name: "Postman", color: "text-orange-500" },
+        { icon: FaNpm, name: "NPM", color: "text-red-500" },
+
+        { icon: SiCanva, name: "Canva", color: "text-blue-400" },
+
+        {
+          icon: SiGithubcopilot,
+          name: "GitHub Copilot",
           color: darkMode ? "text-gray-300" : "text-gray-700",
         },
       ],
@@ -78,6 +129,11 @@ export default function Skills({ darkMode, lang }) {
   const textAnimation = {
     rest: { opacity: 0.8 },
     hover: { opacity: 1, transition: { duration: 0.3 } },
+  };
+
+  // กำหนดทิศทางการเคลื่อนที่ของ Marquee ให้สลับกันไปมา
+  const getMarqueeDirection = (index) => {
+    return index % 2 === 0 ? "left" : "right";
   };
 
   return (
@@ -136,14 +192,10 @@ export default function Skills({ darkMode, lang }) {
 
               <div className="py-4">
                 <Marquee
-                  speed={80}
+                  speed={70}
                   gradient={false}
                   pauseOnHover={true}
-                  direction={
-                    category.name === (t.backend || "Backend")
-                      ? "right"
-                      : "left"
-                  }
+                  direction={getMarqueeDirection(catIndex)}
                 >
                   <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 px-4">
                     {category.skills.map((skill, index) => {
