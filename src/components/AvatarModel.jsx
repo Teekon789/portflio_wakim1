@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-// AvatarModel component - สร้าง 3D Avatar แบบง่ายด้วย Three.js
 const AvatarModel = ({ darkMode }) => {
   const mountRef = useRef(null);
   
@@ -31,10 +30,10 @@ const AvatarModel = ({ darkMode }) => {
     camera.position.z = 5;
     
     // สร้างแสง
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7); // เพิ่มความสว่างของแสงโดยรวม
     scene.add(ambientLight);
     
-    const pointLight = new THREE.PointLight(0xffffff, 1);
+    const pointLight = new THREE.PointLight(0xffffff, 1.2); // เพิ่มความสว่างของแสงจุด
     pointLight.position.set(5, 5, 5);
     scene.add(pointLight);
     
@@ -42,12 +41,12 @@ const AvatarModel = ({ darkMode }) => {
     const avatarGroup = new THREE.Group();
     scene.add(avatarGroup);
     
-    // สร้างหัว (ทรงกลม)
+    // สร้างหัว (ทรงกลม) ด้วยสีที่สว่างขึ้น
     const headGeometry = new THREE.SphereGeometry(1, 32, 32);
     const headMaterial = new THREE.MeshStandardMaterial({ 
-      color: darkMode ? 0x6366f1 : 0x4338ca,
-      roughness: 0.3,
-      metalness: 0.7,
+      color: darkMode ? 0x818cf8 : 0x60a5fa, // เปลี่ยนเป็นสีฟ้าอ่อนที่สว่างกว่าเดิม
+      roughness: 0.2,
+      metalness: 0.5,
     });
     const head = new THREE.Mesh(headGeometry, headMaterial);
     avatarGroup.add(head);
@@ -55,7 +54,7 @@ const AvatarModel = ({ darkMode }) => {
     // สร้างตา (ซ้าย)
     const eyeGeometry = new THREE.SphereGeometry(0.2, 32, 32);
     const eyeMaterial = new THREE.MeshStandardMaterial({ 
-      color: darkMode ? 0xffffff : 0xdddddd,
+      color: darkMode ? 0xffffff : 0xf9fafb, // สีขาวสว่างขึ้น
       roughness: 0.1,
       metalness: 0.9,
     });
@@ -71,7 +70,7 @@ const AvatarModel = ({ darkMode }) => {
     // สร้างม่านตา
     const pupilGeometry = new THREE.SphereGeometry(0.1, 32, 32);
     const pupilMaterial = new THREE.MeshStandardMaterial({ 
-      color: 0x000000,
+      color: 0x334155, // เปลี่ยนจากสีดำเป็นสีเทาเข้มเพื่อให้ไม่ดูมืดเกินไป
       roughness: 0.1,
       metalness: 0.1,
     });
@@ -86,7 +85,7 @@ const AvatarModel = ({ darkMode }) => {
     // สร้างปาก
     const mouthGeometry = new THREE.TorusGeometry(0.3, 0.1, 16, 100, Math.PI);
     const mouthMaterial = new THREE.MeshStandardMaterial({ 
-      color: darkMode ? 0xff4499 : 0xff2277,
+      color: darkMode ? 0xfb7185 : 0xf472b6, // เปลี่ยนเป็นสีชมพูอ่อนที่สว่างกว่า
       roughness: 0.3,
       metalness: 0.2,
     });
@@ -98,7 +97,7 @@ const AvatarModel = ({ darkMode }) => {
     // สร้างโครงร่างรอบหัว
     const outlineGeometry = new THREE.TorusGeometry(1.1, 0.05, 16, 50);
     const outlineMaterial = new THREE.MeshStandardMaterial({ 
-      color: darkMode ? 0xf472b6 : 0xec4899,
+      color: darkMode ? 0xf9a8d4 : 0xfda4af, // เปลี่ยนเป็นสีชมพูอ่อนมากขึ้น
       roughness: 0.3,
       metalness: 0.7,
       side: THREE.DoubleSide,
@@ -111,6 +110,21 @@ const AvatarModel = ({ darkMode }) => {
     const outline2 = new THREE.Mesh(outlineGeometry, outlineMaterial);
     outline2.rotation.set(0, Math.PI/2, 0);
     avatarGroup.add(outline2);
+    
+    // เพิ่มวงแหวนเรืองแสงรอบนอก
+    const glowGeometry = new THREE.TorusGeometry(1.2, 0.03, 16, 50);
+    const glowMaterial = new THREE.MeshStandardMaterial({
+      color: darkMode ? 0xc4b5fd : 0xa5b4fc,
+      roughness: 0.1,
+      metalness: 1.0,
+      emissive: darkMode ? 0x8b5cf6 : 0x93c5fd,
+      emissiveIntensity: 0.5,
+      side: THREE.DoubleSide,
+    });
+    
+    const glow1 = new THREE.Mesh(glowGeometry, glowMaterial);
+    glow1.rotation.set(Math.PI/3, 0, 0);
+    avatarGroup.add(glow1);
     
     // เพิ่มอนิเมชั่นการหมุน
     let mouseX = 0;
@@ -156,6 +170,10 @@ const AvatarModel = ({ darkMode }) => {
       const time = Date.now() * 0.001; // แปลงเป็นวินาที
       avatarGroup.position.y = Math.sin(time) * 0.1;
       
+      // หมุนวงแหวนเรืองแสงเพื่อเพิ่มเอฟเฟกต์
+      glow1.rotation.x += 0.004;
+      glow1.rotation.y += 0.002;
+      
       renderer.render(scene, camera);
     };
     
@@ -187,6 +205,8 @@ const AvatarModel = ({ darkMode }) => {
       mouthMaterial.dispose();
       outlineGeometry.dispose();
       outlineMaterial.dispose();
+      glowGeometry.dispose();
+      glowMaterial.dispose();
       
       // หยุด renderer
       renderer.dispose();
@@ -211,7 +231,7 @@ const AvatarModel = ({ darkMode }) => {
         transition-all
         duration-300
         cursor-pointer
-        ${darkMode ? 'shadow-[0_0_20px_rgba(99,102,241,0.4)]' : 'shadow-[0_0_20px_rgba(67,56,202,0.3)]'}
+        ${darkMode ? 'shadow-[0_0_25px_rgba(139,92,246,0.5)]' : 'shadow-[0_0_25px_rgba(96,165,250,0.4)]'}
         overflow-hidden
         z-10
       `}

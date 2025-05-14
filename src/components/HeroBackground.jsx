@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-// HeroBackground component - สร้าง animation พื้นหลังด้วย Three.js
 const HeroBackground = ({ darkMode }) => {
   const mountRef = useRef(null);
   
@@ -172,8 +171,12 @@ const HeroBackground = ({ darkMode }) => {
   return (
     <div 
       ref={mountRef} 
-      className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden"
-      style={{ pointerEvents: 'none' }}
+      className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden"
+      style={{ 
+        pointerEvents: 'none',
+        // เพิ่ม style เพื่อให้แน่ใจว่าอยู่ด้านหลังจริงๆ
+        zIndex: -1,
+      }}
     />
   );
 };
