@@ -9,9 +9,7 @@ import Skills from "./components/Skills";
 import AboutMe from "./components/AboutMe";
 import Contact from "./components/Contact";
 import Projects from "./components/Projects";
-import HeroBackground from "./components/HeroBackground"; 
-import AvatarModel from "./components/AvatarModel"; 
-
+import AvatarModel from "./components/AvatarModel";
 
 // แยกข้อความภาษาไทย
 import textTH from "./lang/th";
@@ -44,13 +42,10 @@ export default function Portfolio() {
         id="home"
         className={`flex flex-col items-center justify-center min-h-screen text-center px-4 font-thai leading-thai-normal ${
           darkMode ? "text-white" : "text-gray-800"
-        } relative overflow-hidden`} 
+        } relative overflow-hidden`}
       >
-        {/* Three.js Background */}
-        <HeroBackground darkMode={darkMode} /> 
-        
         <motion.h1
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 overflow-visible leading-thai-tight z-10" 
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 overflow-visible leading-thai-tight z-10"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -141,7 +136,7 @@ export default function Portfolio() {
         <motion.p
           className={`text-lg sm:text-xl md:text-2xl max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mb-8 leading-relaxed py-1 thai-text z-10 ${
             darkMode ? "text-gray-300" : "text-gray-600"
-          }`} 
+          }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -160,7 +155,7 @@ export default function Portfolio() {
         </motion.div>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 items-center z-10" 
+          className="flex flex-col sm:flex-row gap-4 items-center z-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
