@@ -80,8 +80,9 @@ const textEN = {
       desc: "Proficient in using various tools to enhance the software development process.",
     },
   },
-
- 
+  
+  LinkedIn: "LinkedIn is currently unavailable.",
+  
 
 };
 

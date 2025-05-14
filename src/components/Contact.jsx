@@ -61,7 +61,8 @@ const Contact = ({ darkMode, t }) => {
     {
       icon: <FaLinkedin className="w-5 h-5" />,
       title: "LinkedIn",
-      value: "Wakim_Sutti",
+      value: t.LinkedIn || "LinkedIn ใช้งานไม่ได้ในขณะนี้",
+      // ลิงค์ไดนามิกที่เปลี่ยนแปลงตามอุปกรณ์
       link: "https://www.linkedin.com/in/wakim-sutti-01a469364?fbclid=IwZXh0bgNhZW0CMTEAYnJpZBExcGY3U0wzUUZienRxelpPcgEept8_8_JqDT4j4VjRZ54799k8u8TebSTc70cUm3yYf1IvDXLEkniv9bEwKLo_aem_BW5-0F-qaMro76DW79nYUA",
     },
   ];
