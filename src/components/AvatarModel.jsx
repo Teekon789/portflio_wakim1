@@ -126,9 +126,50 @@ const AvatarModel = ({ darkMode }) => {
     glow1.rotation.set(Math.PI/3, 0, 0);
     avatarGroup.add(glow1);
     
-    // เพิ่มอนิเมชั่นการหมุน
+    // เพิ่มแสงเรืองรอบหัว
+    const haloGeometry = new THREE.RingGeometry(1.3, 1.5, 32);
+    const haloMaterial = new THREE.MeshBasicMaterial({
+      color: darkMode ? 0xa78bfa : 0x93c5fd,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.3,
+    });
+    const halo = new THREE.Mesh(haloGeometry, haloMaterial);
+    halo.rotation.x = Math.PI / 2;
+    avatarGroup.add(halo);
+    
+    // สร้างเปลือกตา
+    const eyelidGeometry = new THREE.SphereGeometry(0.21, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6);
+    const eyelidMaterial = new THREE.MeshStandardMaterial({
+      color: headMaterial.color,
+      roughness: 0.2,
+      metalness: 0.5,
+      side: THREE.DoubleSide,
+    });
+    
+    const leftEyelid = new THREE.Mesh(eyelidGeometry, eyelidMaterial);
+    leftEyelid.position.set(-0.4, 0.2, 0.85);
+    leftEyelid.rotation.x = Math.PI;
+    leftEyelid.visible = false; // เริ่มต้นไม่แสดง
+    avatarGroup.add(leftEyelid);
+    
+    const rightEyelid = new THREE.Mesh(eyelidGeometry, eyelidMaterial);
+    rightEyelid.position.set(0.4, 0.2, 0.85);
+    rightEyelid.rotation.x = Math.PI;
+    rightEyelid.visible = false; // เริ่มต้นไม่แสดง
+    avatarGroup.add(rightEyelid);
+    
+    // ตัวแปรสำหรับควบคุมอนิเมชัน
     let mouseX = 0;
     let mouseY = 0;
+    let lastMouseMoveTime = Date.now();
+    let isBlinking = false;
+    let blinkTimeout = null;
+    let isMouthMoving = false;
+    let mouthTimeout = null;
+    let idleMovementAngle = 0;
+    let idleEyeMovementAngle = 0;
+    let isUserInteracting = false;
     
     // รับพิกัดเมาส์
     const handleMouseMove = (event) => {
@@ -138,7 +179,86 @@ const AvatarModel = ({ darkMode }) => {
       
       mouseX = (event.clientX - windowHalfX) / windowHalfX;
       mouseY = (event.clientY - windowHalfY) / windowHalfY;
+      
+      lastMouseMoveTime = Date.now();
+      isUserInteracting = true;
+      
+      // ยกเลิกการกะพริบตาที่กำลังจะเกิดขึ้น
+      if (blinkTimeout) {
+        clearTimeout(blinkTimeout);
+      }
+      
+      // ตั้งเวลากะพริบตาใหม่
+      scheduleNextBlink();
     };
+    
+    // ฟังก์ชันกะพริบตา
+    const blink = () => {
+      if (isBlinking) return;
+      
+      isBlinking = true;
+      leftEyelid.visible = true;
+      rightEyelid.visible = true;
+      
+      // เปิดตาหลังจาก 150ms
+      setTimeout(() => {
+        leftEyelid.visible = false;
+        rightEyelid.visible = false;
+        isBlinking = false;
+        
+        // กะพริบตารอบถัดไป
+        scheduleNextBlink();
+      }, 150);
+    };
+    
+    // ฟังก์ชันตั้งเวลากะพริบตา
+    const scheduleNextBlink = () => {
+      if (blinkTimeout) {
+        clearTimeout(blinkTimeout);
+      }
+      
+      // กะพริบตาทุก 2-6 วินาที
+      const nextBlinkTime = 2000 + Math.random() * 4000;
+      blinkTimeout = setTimeout(blink, nextBlinkTime);
+    };
+    
+    // ฟังก์ชันเคลื่อนไหวปาก
+    const moveMouth = () => {
+      if (isMouthMoving) return;
+      
+      isMouthMoving = true;
+      
+      // สุ่มขนาดปาก
+      const originalScale = mouth.scale.clone();
+      const targetScaleY = 0.6 + Math.random() * 0.8;
+      
+      // เปลี่ยนขนาดปาก
+      mouth.scale.y = targetScaleY;
+      
+      // คืนค่าปากหลังจาก 300ms
+      setTimeout(() => {
+        mouth.scale.y = originalScale.y;
+        isMouthMoving = false;
+        
+        // เคลื่อนไหวปากรอบถัดไป
+        scheduleNextMouthMovement();
+      }, 300);
+    };
+    
+    // ฟังก์ชันตั้งเวลาเคลื่อนไหวปาก
+    const scheduleNextMouthMovement = () => {
+      if (mouthTimeout) {
+        clearTimeout(mouthTimeout);
+      }
+      
+      // เคลื่อนไหวปากทุก 5-10 วินาที
+      const nextMouthTime = 5000 + Math.random() * 5000;
+      mouthTimeout = setTimeout(moveMouth, nextMouthTime);
+    };
+    
+    // เริ่มต้นตั้งเวลากะพริบตาและเคลื่อนไหวปาก
+    scheduleNextBlink();
+    scheduleNextMouthMovement();
     
     window.addEventListener('mousemove', handleMouseMove);
     
@@ -146,33 +266,82 @@ const AvatarModel = ({ darkMode }) => {
     const animate = () => {
       requestAnimationFrame(animate);
       
-      // หมุน avatar ตามตำแหน่งเมาส์อย่างนุ่มนวล
-      avatarGroup.rotation.y = THREE.MathUtils.lerp(
-        avatarGroup.rotation.y, 
-        mouseX * 0.5, 
-        0.05
-      );
+      const currentTime = Date.now();
+      const idleTime = 3000; // 3 วินาทีไม่มีการเคลื่อนไหวเมาส์จะเริ่มเข้าสู่โหมด idle
       
-      avatarGroup.rotation.x = THREE.MathUtils.lerp(
-        avatarGroup.rotation.x, 
-        mouseY * 0.3, 
-        0.05
-      );
+      // ตรวจสอบว่าอยู่ในโหมด idle หรือไม่
+      isUserInteracting = currentTime - lastMouseMoveTime < idleTime;
       
-      // เคลื่อนไหวรูม่านตาตามตำแหน่งเมาส์
-      leftPupil.position.x = -0.4 + mouseX * 0.05;
-      rightPupil.position.x = 0.4 + mouseX * 0.05;
+      // คำนวณการเคลื่อนไหวในโหมด idle
+      if (!isUserInteracting) {
+        // เพิ่มมุมการเคลื่อนไหวแบบ idle
+        idleMovementAngle += 0.005;
+        idleEyeMovementAngle += 0.01;
+        
+        // เคลื่อนไหวแบบวงกลมเล็กๆ
+        const idleX = Math.sin(idleMovementAngle) * 0.3;
+        const idleY = Math.cos(idleMovementAngle * 0.5) * 0.2;
+        
+        // หมุนหัวในโหมด idle
+        avatarGroup.rotation.y = THREE.MathUtils.lerp(
+          avatarGroup.rotation.y, 
+          idleX, 
+          0.02
+        );
+        
+        avatarGroup.rotation.x = THREE.MathUtils.lerp(
+          avatarGroup.rotation.x, 
+          idleY, 
+          0.02
+        );
+        
+        // เคลื่อนไหวตาแบบวงกลมในโหมด idle
+        const eyeIdleX = Math.sin(idleEyeMovementAngle) * 0.08;
+        const eyeIdleY = Math.cos(idleEyeMovementAngle) * 0.05;
+        
+        leftPupil.position.x = -0.4 + eyeIdleX;
+        rightPupil.position.x = 0.4 + eyeIdleX;
+        
+        leftPupil.position.y = 0.2 + eyeIdleY;
+        rightPupil.position.y = 0.2 + eyeIdleY;
+      } else {
+        // หมุน avatar ตามตำแหน่งเมาส์อย่างนุ่มนวล
+        avatarGroup.rotation.y = THREE.MathUtils.lerp(
+          avatarGroup.rotation.y, 
+          mouseX * 0.5, 
+          0.05
+        );
+        
+        avatarGroup.rotation.x = THREE.MathUtils.lerp(
+          avatarGroup.rotation.x, 
+          mouseY * 0.3, 
+          0.05
+        );
+        
+        // เคลื่อนไหวรูม่านตาตามตำแหน่งเมาส์
+        leftPupil.position.x = -0.4 + mouseX * 0.05;
+        rightPupil.position.x = 0.4 + mouseX * 0.05;
+        
+        leftPupil.position.y = 0.2 - mouseY * 0.05;
+        rightPupil.position.y = 0.2 - mouseY * 0.05;
+      }
       
-      leftPupil.position.y = 0.2 - mouseY * 0.05;
-      rightPupil.position.y = 0.2 - mouseY * 0.05;
-      
-      // เพิ่มการเคลื่อนไหวลอยขึ้น-ลงเล็กน้อย
+      // เพิ่มการเคลื่อนไหวลอยขึ้น-ลงเล็กน้อย (การหายใจ)
       const time = Date.now() * 0.001; // แปลงเป็นวินาที
-      avatarGroup.position.y = Math.sin(time) * 0.1;
+      const breathAmp = isUserInteracting ? 0.1 : 0.15; // เพิ่มแอมพลิจูดเมื่ออยู่ในโหมด idle
+      avatarGroup.position.y = Math.sin(time * 0.8) * breathAmp;
+      
+      // เพิ่มการเคลื่อนไหวบิดเอียงเล็กน้อย (คล้ายการหายใจ)
+      avatarGroup.rotation.z = Math.sin(time * 0.5) * 0.03;
       
       // หมุนวงแหวนเรืองแสงเพื่อเพิ่มเอฟเฟกต์
       glow1.rotation.x += 0.004;
       glow1.rotation.y += 0.002;
+      
+      // เพิ่มการเปลี่ยนแปลงขนาดและความโปร่งใสของแสงเรือง
+      const haloScale = 1 + Math.sin(time * 1.2) * 0.1;
+      halo.scale.set(haloScale, haloScale, haloScale);
+      halo.material.opacity = 0.2 + Math.sin(time) * 0.1;
       
       renderer.render(scene, camera);
     };
@@ -191,6 +360,10 @@ const AvatarModel = ({ darkMode }) => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       
+      // ยกเลิก timeout ทั้งหมด
+      if (blinkTimeout) clearTimeout(blinkTimeout);
+      if (mouthTimeout) clearTimeout(mouthTimeout);
+      
       // ล้าง scene
       scene.remove(avatarGroup);
       
@@ -207,6 +380,10 @@ const AvatarModel = ({ darkMode }) => {
       outlineMaterial.dispose();
       glowGeometry.dispose();
       glowMaterial.dispose();
+      haloGeometry.dispose();
+      haloMaterial.dispose();
+      eyelidGeometry.dispose();
+      eyelidMaterial.dispose();
       
       // หยุด renderer
       renderer.dispose();
