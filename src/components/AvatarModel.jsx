@@ -40,7 +40,7 @@ const AvatarModel = ({ darkMode, t }) => {
     if (showMessage && messageRef.current) {
       messageRef.current.style.opacity = "0";
       messageRef.current.style.transform = "translateY(10px) scale(0.9)";
-      
+
       setTimeout(() => {
         messageRef.current.style.opacity = "1";
         messageRef.current.style.transform = "translateY(0) scale(1)";
@@ -144,42 +144,6 @@ const AvatarModel = ({ darkMode, t }) => {
     mouth.position.set(0, -0.3, 0.9);
     mouth.rotation.set(Math.PI, 0, 0);
     avatarGroup.add(mouth);
-    
-    // เพิ่มแว่นตา (เฉพาะโหมดสว่าง)
-    let glasses = null;
-    if (!darkMode) {
-      // กรอบแว่น
-      const glassesFrameGeometry = new THREE.TorusGeometry(0.22, 0.03, 16, 100);
-      const glassesFrameMaterial = new THREE.MeshStandardMaterial({
-        color: 0x374151,
-        roughness: 0.2,
-        metalness: 0.8
-      });
-      
-      // แว่นตาข้างซ้าย
-      const leftGlasses = new THREE.Mesh(glassesFrameGeometry, glassesFrameMaterial);
-      leftGlasses.position.set(-0.4, 0.2, 0.85);
-      leftGlasses.rotation.y = Math.PI / 2;
-      
-      // แว่นตาข้างขวา
-      const rightGlasses = new THREE.Mesh(glassesFrameGeometry, glassesFrameMaterial);
-      rightGlasses.position.set(0.4, 0.2, 0.85);
-      rightGlasses.rotation.y = Math.PI / 2;
-      
-      // เชื่อมกรอบแว่น
-      const bridgeGeometry = new THREE.CylinderGeometry(0.02, 0.02, 0.8, 16);
-      const bridge = new THREE.Mesh(bridgeGeometry, glassesFrameMaterial);
-      bridge.position.set(0, 0.2, 0.85);
-      bridge.rotation.z = Math.PI / 2;
-      
-      // สร้างกลุ่มแว่นตา
-      glasses = new THREE.Group();
-      glasses.add(leftGlasses);
-      glasses.add(rightGlasses);
-      glasses.add(bridge);
-      
-      avatarGroup.add(glasses);
-    }
 
     // สร้างโครงร่างรอบหัว
     const outlineGeometry = new THREE.TorusGeometry(1.1, 0.05, 16, 50);
@@ -253,35 +217,52 @@ const AvatarModel = ({ darkMode, t }) => {
     rightEyelid.rotation.x = Math.PI;
     rightEyelid.visible = false; // เริ่มต้นไม่แสดง
     avatarGroup.add(rightEyelid);
-    
+
     // เพิ่มหูฟัง (เฉพาะโหมดมืด)
     if (darkMode) {
       // สร้างก้านหูฟัง
-      const headphoneBandGeometry = new THREE.TorusGeometry(1.05, 0.05, 16, 32, Math.PI);
+      const headphoneBandGeometry = new THREE.TorusGeometry(
+        1.05,
+        0.05,
+        16,
+        32,
+        Math.PI
+      );
       const headphoneBandMaterial = new THREE.MeshStandardMaterial({
         color: 0x6366f1,
         roughness: 0.3,
-        metalness: 0.7
+        metalness: 0.7,
       });
-      const headphoneBand = new THREE.Mesh(headphoneBandGeometry, headphoneBandMaterial);
+      const headphoneBand = new THREE.Mesh(
+        headphoneBandGeometry,
+        headphoneBandMaterial
+      );
       headphoneBand.position.set(0, 0, 0);
       headphoneBand.rotation.set(0, 0, Math.PI);
       avatarGroup.add(headphoneBand);
-      
+
       // สร้างฝาครอบหูซ้าย
-      const earphoneGeometry = new THREE.SphereGeometry(0.25, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.7);
+      const earphoneGeometry = new THREE.SphereGeometry(
+        0.25,
+        32,
+        32,
+        0,
+        Math.PI * 2,
+        0,
+        Math.PI * 0.7
+      );
       const earphoneMaterial = new THREE.MeshStandardMaterial({
         color: 0x818cf8,
         roughness: 0.2,
         metalness: 0.8,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       });
-      
+
       const leftEarphone = new THREE.Mesh(earphoneGeometry, earphoneMaterial);
       leftEarphone.position.set(-1.05, 0, 0);
       leftEarphone.rotation.set(0, Math.PI / 2, 0);
       avatarGroup.add(leftEarphone);
-      
+
       // สร้างฝาครอบหูขวา
       const rightEarphone = new THREE.Mesh(earphoneGeometry, earphoneMaterial);
       rightEarphone.position.set(1.05, 0, 0);
@@ -310,31 +291,31 @@ const AvatarModel = ({ darkMode, t }) => {
       roughness: 0.2,
       metalness: 0.5,
     });
-    
+
     const arm = new THREE.Mesh(armGeometry, armMaterial);
     arm.position.set(1.2, -0.6, 0);
     arm.rotation.z = Math.PI / 4; // เอียงแขนขึ้น
-    
+
     // สร้างข้อศอก (pivot point)
     const elbow = new THREE.Group();
     elbow.position.set(1.2, -0.6, 0);
-    
+
     // สร้างแขนส่วนล่าง
     const forearmGeometry = new THREE.CylinderGeometry(0.06, 0.05, 0.7, 16);
     const forearm = new THREE.Mesh(forearmGeometry, armMaterial);
     forearm.position.set(0.4, 0.3, 0);
-    
+
     // สร้างมือ
     const handGeometry = new THREE.SphereGeometry(0.1, 16, 16);
     const hand = new THREE.Mesh(handGeometry, armMaterial);
     hand.position.set(0.7, 0.6, 0);
-    
+
     // เพิ่มแขนและมือเข้าไปในกลุ่ม
     elbow.add(forearm);
     elbow.add(hand);
     avatarGroup.add(arm);
     avatarGroup.add(elbow);
-    
+
     // ซ่อนแขนและมือเริ่มต้น
     arm.visible = false;
     elbow.visible = false;
@@ -423,18 +404,18 @@ const AvatarModel = ({ darkMode, t }) => {
       const nextMouthTime = 5000 + Math.random() * 5000;
       mouthTimeout = setTimeout(moveMouth, nextMouthTime);
     };
-    
+
     // ฟังก์ชันสำหรับการโบกมือ
     const waveHand = () => {
       if (isWaving) return;
-      
+
       isWaving = true;
       lastClickTime = Date.now();
-      
+
       // แสดงแขนและมือ
       arm.visible = true;
       elbow.visible = true;
-      
+
       // ซ่อนแขนและมือหลังจาก 3 วินาที
       setTimeout(() => {
         arm.visible = false;
@@ -543,7 +524,7 @@ const AvatarModel = ({ darkMode, t }) => {
       const haloScale = 1 + Math.sin(time * 1.2) * 0.1;
       halo.scale.set(haloScale, haloScale, haloScale);
       halo.material.opacity = 0.2 + Math.sin(time) * 0.1;
-      
+
       // อนิเมชั่นโบกมือ
       if (isWaving) {
         const waveTime = (Date.now() - lastClickTime) * 0.005;
@@ -592,12 +573,12 @@ const AvatarModel = ({ darkMode, t }) => {
       haloMaterial.dispose();
       eyelidGeometry.dispose();
       eyelidMaterial.dispose();
-      
+
       // ล้าง geometry และ material ที่เพิ่มเข้ามาใหม่
       if (armGeometry) armGeometry.dispose();
       if (armMaterial) armMaterial.dispose();
       if (forearmGeometry) forearmGeometry.dispose();
-      
+
       // ล้าง renderer
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
@@ -614,10 +595,10 @@ const AvatarModel = ({ darkMode, t }) => {
         className="w-auto h-auto md:w-auto md:h-auto cursor-pointer"
         onClick={handleAvatarClick}
       ></div>
-     
+
       {/* ช่องข้อความแบบใหม่ที่สวยงามและ responsive */}
       {showMessage && (
-        <div 
+        <div
           ref={messageRef}
           className={`
             absolute bottom-52 left-1/2 -translate-x-1/2 mb-3
@@ -626,34 +607,36 @@ const AvatarModel = ({ darkMode, t }) => {
             text-gray-800 dark:text-gray-100
             transition-all duration-300
             max-w-[90vw] w-max
-            ${darkMode ? 'border-indigo-400' : 'border-blue-300'} border
+            ${darkMode ? "border-indigo-400" : "border-blue-300"} border
             before:content-[''] before:absolute before:top-full before:left-1/2 
             before:-translate-x-1/2 before:border-8 before:border-transparent 
             before:border-t-white dark:before:border-t-gray-800
             z-10
           `}
           style={{
-            boxShadow: darkMode 
-              ? '0 4px 20px rgba(99, 102, 241, 0.3)' 
-              : '0 4px 20px rgba(59, 130, 246, 0.3)',
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+            boxShadow: darkMode
+              ? "0 4px 20px rgba(99, 102, 241, 0.3)"
+              : "0 4px 20px rgba(59, 130, 246, 0.3)",
+            filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
           }}
         >
           <div className="flex flex-col items-center">
             {/* เอฟเฟกต์การพูด */}
             <div className="flex space-x-1 mb-2">
               {[1, 2, 3].map((i) => (
-                <div 
+                <div
                   key={i}
-                  className={`w-2 h-2 rounded-full ${darkMode ? 'bg-indigo-300' : 'bg-blue-300'}`}
+                  className={`w-2 h-2 rounded-full ${
+                    darkMode ? "bg-indigo-300" : "bg-blue-300"
+                  }`}
                   style={{
-                    opacity: 0.3 + (i * 0.2),
-                    animation: `pulse 1.5s infinite ${i * 0.2}s`
+                    opacity: 0.3 + i * 0.2,
+                    animation: `pulse 1.5s infinite ${i * 0.2}s`,
                   }}
                 />
               ))}
             </div>
-            
+
             <p className="text-sm md:text-base text-center leading-relaxed">
               {message}
             </p>
@@ -664,8 +647,13 @@ const AvatarModel = ({ darkMode, t }) => {
       {/* CSS Animation */}
       <style jsx>{`
         @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.2); }
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.2);
+          }
         }
       `}</style>
     </div>
