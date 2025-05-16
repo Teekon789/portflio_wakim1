@@ -26,13 +26,13 @@ const AvatarModel = ({ darkMode, t }) => {
       clearTimeout(messageTimer.current);
     }
 
-    // ใช้ getRandomMessage โดยไม่ต้องส่ง t เข้าไป
+    // สุ่มข้อความใหม่เมื่อคลิกที่ avatar
     setMessage(getRandomMessage());
     setShowMessage(true);
-    
+    // ตั้งค่าให้แสดงข้อความ
     messageTimer.current = setTimeout(() => {
       setShowMessage(false);
-    }, 5000);
+    }, 3500);
   };
 
   // เอฟเฟกต์การแสดงข้อความ
