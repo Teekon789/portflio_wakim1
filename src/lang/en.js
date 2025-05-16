@@ -82,6 +82,15 @@ const textEN = {
   },
   
   LinkedIn: "LinkedIn is currently unavailable.",
+
+  avatar: {
+    message1: "Welcome to my portfolio!",
+    message2: "I'm Wakim Sutthi, a Front-End and Back-End web developer",
+    message3: "I'm passionate about creating user-friendly and efficient web applications", 
+    message4: "If you'd like to get in touch or have a chat, contact me here",
+    message5: "You can download my resume here",
+    message6: "You can view my projects here"
+  },
   
 
 };

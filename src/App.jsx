@@ -151,7 +151,7 @@ export default function Portfolio() {
           transition={{ delay: 0.4, duration: 0.5 }}
           className="my-4"
         >
-          <AvatarModel darkMode={darkMode} />
+          <AvatarModel darkMode={darkMode} t={t} />
         </motion.div>
 
         <motion.div
