@@ -7,7 +7,7 @@ export default function Footer({ darkMode }) {
       py-6
     `}>
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
           {/* Left Section */}
           <div className="text-center md:text-left">
             <div className="text-base font-medium inline-block">
@@ -22,16 +22,9 @@ export default function Footer({ darkMode }) {
             </div>
           </div>
 
-          {/* Center Section */}
-          <div className="text-center">
-            <p className="text-sm font-medium">
-           
-            </p>
-          </div>
-
           {/* Right Section */}
           <div className="text-center md:text-right">
-            <p className="text-sm font-medium hover:text-indigo-500 transition-colors duration-300 ">
+            <p className="text-sm font-medium hover:text-indigo-500 transition-colors duration-300">
               Design by Wakim.
             </p>
           </div>
