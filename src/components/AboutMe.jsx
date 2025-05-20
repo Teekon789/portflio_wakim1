@@ -1,5 +1,11 @@
 import { motion } from "framer-motion";
-import { FaDownload, FaGraduationCap, FaUniversity } from "react-icons/fa";
+import {
+  FaDownload,
+  FaGraduationCap,
+  FaUniversity,
+  FaExternalLinkAlt,
+} from "react-icons/fa";
+import { LiaCertificateSolid } from "react-icons/lia";
 import resumeFile from "../assets/Resume.pdf"; // Adjust path as needed
 
 export default function AboutMe({ darkMode, t, profileImage }) {
@@ -13,6 +19,7 @@ export default function AboutMe({ darkMode, t, profileImage }) {
     document.body.removeChild(link);
   };
 
+  // ข้อมูลการศึกษา
   const educationInfo = [
     {
       icon: <FaGraduationCap className="text-xl sm:text-2xl" />,
@@ -25,6 +32,18 @@ export default function AboutMe({ darkMode, t, profileImage }) {
       description: t.about.university,
     },
     // เพิ่มรายการเพิ่มเติม
+  ];
+
+  // ข้อมูลประกาศนียบัตร
+  const certificateInfo = [
+    {
+      icon: <LiaCertificateSolid className="text-xl sm:text-2xl" />,
+      title: t.certificate.title,
+      description: t.certificate.desc,
+      link: "https://app.futureskill.co/api/certificate?courseId=898&userId=243133", // ปรับลิงก์ตามความเหมาะสม
+      linkText: t.certificate.view,
+    },
+    // สามารถเพิ่มประกาศนียบัตรอื่นๆ ที่นี่
   ];
 
   return (
@@ -100,13 +119,21 @@ export default function AboutMe({ darkMode, t, profileImage }) {
                 {t.about.content}
               </p>
 
+              {/* ส่วนข้อมูลการศึกษา */}
               <div
                 className={`p-4 sm:p-6 rounded-xl ${
                   darkMode ? "bg-gray-700" : "bg-gray-100"
                 } shadow-md w-full text-left`}
               >
+                <h3
+                  className={`text-lg sm:text-xl font-semibold mb-4 ${
+                    darkMode ? "text-white" : "text-gray-800"
+                  }`}
+                >
+                  Education
+                </h3>
                 <div className="space-y-4 sm:space-y-6">
-                  {/* วนซ้ำผ่านรายการข้อมูล*/}
+                  {/* วนซ้ำผ่านรายการข้อมูลการศึกษา */}
                   {educationInfo.map((item, index) => (
                     <div
                       key={index}
@@ -141,6 +168,83 @@ export default function AboutMe({ darkMode, t, profileImage }) {
                   ))}
                 </div>
               </div>
+
+              {/* ส่วนประกาศนียบัตร */}
+              <motion.div
+                className={`p-4 sm:p-6 rounded-xl ${
+                  darkMode ? "bg-gray-700" : "bg-gray-100"
+                } shadow-md w-full text-left`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h3
+                  className={`text-lg sm:text-xl font-semibold mb-4 ${
+                    darkMode ? "text-white" : "text-gray-800"
+                  }`}
+                >
+                  Certificates
+                </h3>
+                <div className="space-y-4 sm:space-y-6">
+                  {/* วนซ้ำผ่านรายการข้อมูลประกาศนียบัตร */}
+                  {certificateInfo.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full"
+                    >
+                      <div
+                        className={`w-10 h-10 flex items-center justify-center rounded-lg ${
+                          darkMode
+                            ? "bg-indigo-800 text-indigo-200"
+                            : "bg-indigo-100 text-indigo-600"
+                        }`}
+                      >
+                        {item.icon}
+                      </div>
+                      <div className="w-full">
+                        <h3
+                          className={`text-lg sm:text-xl font-semibold ${
+                            darkMode ? "text-indigo-300" : "text-indigo-600"
+                          }`}
+                        >
+                          {item.title}
+                        </h3>
+                        <p
+                          className={`mt-1 text-sm sm:text-base ${
+                            darkMode ? "text-gray-400" : "text-gray-600"
+                          }`}
+                        >
+                          {item.description}
+                        </p>
+                        {/* ลิงก์ดูประกาศนียบัตร */}
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-2 mt-2 text-sm sm:text-base font-medium transition-colors ${
+                            darkMode
+                              ? "text-indigo-300 hover:text-indigo-200"
+                              : "text-indigo-600 hover:text-indigo-800"
+                          }`}
+                        >
+                          {item.linkText}{" "}
+                          <FaExternalLinkAlt className="text-xs sm:text-sm ml-1" />
+                          <span
+                            className={`${
+                              darkMode
+                                ? "text-indigo-300"
+                                : "text-indigo-600"
+                            } text-xs sm:text-sm font-bold`}
+                          >
+                            2025
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
 
               {/* ปุ่มดาวน์โหลด Resume */}
               <div className="flex justify-center lg:justify-start">

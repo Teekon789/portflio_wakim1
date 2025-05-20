@@ -10,6 +10,7 @@ import AboutMe from "./components/AboutMe";
 import Contact from "./components/Contact";
 import Projects from "./components/Projects";
 import AvatarModel from "./components/AvatarModel";
+import Footer from "./components/Footer";
 
 // แยกข้อความภาษาไทย
 import textTH from "./lang/th";
@@ -202,6 +203,9 @@ export default function Portfolio() {
 
       {/* ปุ่มเลื่อนขึ้นด้านบน */}
       <Scrollup darkMode={darkMode} lang={lang} />
+
+      {/* Footer */}
+      <Footer darkMode={darkMode} />
     </div>
   );
 }

@@ -12,7 +12,8 @@ const textEN = {
   contactMe: "Contact Me",
   copyright: "All rights reserved.",
   skills: "My Skills",
-  skillsDesc:"Here are the technologies and tools I specialize in for development projects.",
+  skillsDesc:
+    "Here are the technologies and tools I specialize in for development projects.",
 
   about: {
     title: "About Me",
@@ -26,8 +27,8 @@ const textEN = {
   },
 
   projects_name: {
-    title: "Permission and PDF Document Request System",
-    desc: "A web application for requesting permissions and generating PDF documents built with Next.js. The document generation uses react-pdf...",
+    title: "Permission Request and PDF Document System",
+    desc: "Developed a web application using Next.js for handling permission requests, including a dashboard to view requested budgets, rejected requests with reasons, and real-time notifications on approval status. All data is stored in a MongoDB database. Related documents are generated in PDF format using React-PDF.",
     title2: "Blog App",
     desc2:
       "A blog web application built with Next.js, using MongoDB as the database and NextAuth for user authentication. The system allows users to register, log in, create articles, and post comments. An admin dashboard is included for managing posts, comments, and user accounts.",
@@ -80,19 +81,24 @@ const textEN = {
       desc: "Proficient in using various tools to enhance the software development process.",
     },
   },
-  
-  LinkedIn: "LinkedIn is currently unavailable.",
+
+  LinkedIn: "LinkedIn wakim-sutthi",
 
   avatar: {
     message1: "Welcome to my portfolio!",
     message2: "I'm Wakim Sutthi, a Front-End and Back-End web developer",
-    message3: "I'm passionate about creating user-friendly and efficient web applications", 
+    message3:
+      "I'm passionate about creating user-friendly and efficient web applications",
     message4: "If you'd like to get in touch or have a chat, contact me here",
     message5: "You can download my resume here",
-    message6: "You can view my projects here"
+    message6: "You can view my projects here",
   },
-  
 
+  certificate: {
+    title: "Next.js Dashboard Development and Deployment",
+    desc: "Online course offered by FutureSkill",
+    view: "View Certificate",
+  },
 };
 
 export default textEN;

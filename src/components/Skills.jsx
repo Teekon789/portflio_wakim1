@@ -30,6 +30,7 @@ import {
   SiGithubcopilot,
   SiNuxtdotjs,
   SiVite,
+  SiAngular,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import Marquee from "react-fast-marquee";
@@ -62,6 +63,7 @@ export default function Skills({ darkMode, lang }) {
         { icon: SiTailwindcss, name: "Tailwindcss", color: "text-blue-400" },
         { icon: FaReact, name: "React", color: "text-cyan-400" },
         { icon: FaVuejs, name: "Vue", color: "text-green-500" },
+        { icon: SiAngular, name: "Angular", color: "text-red-600" },
       ],
     },
     {
