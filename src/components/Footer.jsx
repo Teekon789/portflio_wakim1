@@ -10,21 +10,28 @@ export default function Footer({ darkMode }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
           {/* Left Section */}
           <div className="text-center md:text-left">
-            <p className="text-sm">
-              © {new Date().getFullYear()} PortfolioWakim
-            </p>
+            <div className="text-base font-medium inline-block">
+              <span>© {new Date().getFullYear()} </span>
+              <span className="relative inline-block overflow-visible transition-all duration-300 hover:transform hover:scale-105">
+                <span className={`${darkMode ? "text-indigo-400" : "text-indigo-600"}`}>Portfolio</span>
+                <span className={`${darkMode ? "text-indigo-300" : "text-indigo-500"}`}>Wakim</span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 hover:w-full ${
+                  darkMode ? "bg-indigo-300" : "bg-indigo-500"
+                }`}></span>
+              </span>
+            </div>
           </div>
 
           {/* Center Section */}
           <div className="text-center">
             <p className="text-sm font-medium">
-              Made with by Wakim
+           
             </p>
           </div>
 
           {/* Right Section */}
           <div className="text-center md:text-right">
-            <p className="text-sm font-light hover:text-indigo-500 transition-colors duration-300">
+            <p className="text-sm font-medium hover:text-indigo-500 transition-colors duration-300 ">
               Design by Wakim.
             </p>
           </div>
