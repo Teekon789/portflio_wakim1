@@ -89,7 +89,7 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
         <div className="flex justify-between items-center py-4 md:py-5">
           {/* โลโก้ */}
           <a
-            href="#home"
+            href=""
             className={`text-2xl font-bold inline-block ${
               darkMode ? "text-indigo-400" : "text-indigo-600"
             }`}
@@ -97,7 +97,7 @@ const Navbar = ({ darkMode, setDarkMode, lang, setLang, t }) => {
             <div className="relative inline-block overflow-visible transition-all duration-300 hover:transform hover:scale-105">
               <span className="relative z-10">Port</span>
               <span>
-              folio
+                folio
                 <span
                   className={`${
                     darkMode ? "text-indigo-300" : "text-indigo-500"
